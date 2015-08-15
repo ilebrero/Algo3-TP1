@@ -1,6 +1,6 @@
 package tp1.main;
 
-import tp1.exercices.Exercice2;
+import tp1.exercises.Exercise2;
 
 public class Main {
 
@@ -15,10 +15,10 @@ public static void main(String...arg)
 	int[] result2;
 	int[] result3;
 	
-	result = Exercice2.exerice2(array);
-	result1 = Exercice2.exerice2(array1);
-	result2 = Exercice2.exerice2(array2);
-	result3 = Exercice2.exerice2(array3);
+	result  = Exercise2.exerice2(array);
+	result1 = Exercise2.exerice2(array1);
+	result2 = Exercise2.exerice2(array2);
+	result3 = Exercise2.exerice2(array3);
 	
 	
 	for (int i = 0; i < result.length; i++) {
