@@ -12,10 +12,11 @@ public class Exercise2 {
 	
  public static int[] exerice2(int[] array) {
 	 for (int j = 0; j < middle.length; j++) {
-		middle[j] = 190;
-	}
-	 leftHeap = new MinHeap(200);
-	 rigthHeap = new MinHeap(200);
+		middle[j] = Integer.MAX_VALUE;
+	 }
+	 
+	 leftHeap = new MinHeap(array.length);
+	 rigthHeap = new MinHeap(array.length);
 	 
 	 int i = 0;
 	 int[] resultArray = new int[array.length];
@@ -24,11 +25,13 @@ public class Exercise2 {
 		 resultArray[i] = calculateMediana(array[i],i);
 		 i++;
 	 }
-	return resultArray;
+	 
+	 return resultArray;
 	
 }
 private static int calculateMediana(int number, int i) {
 	if (i < 3){
+		// Maneja los primeros 3 casos.
 		return calculateMedianaSpecial(number, i);
 	} else{
 		if (number < middle[0]){
@@ -43,7 +46,9 @@ private static int calculateMediana(int number, int i) {
 			rigthHeap.insert(number);
 		}
 	}
+	
 	adjustStruct();
+	
 	if ((i+1) % 2 == 0){
 		if (rigthHeap.size() > leftHeap.size()){
 			return ((middle[2] + middle[1]) /2);
@@ -58,6 +63,7 @@ private static int calculateMediana(int number, int i) {
 
 
 private static void adjustStruct(){
+	// A lo sumo debe hacer un solo movimiento.
 	if (rigthHeap.size() - leftHeap.size() > 1){
 		leftHeap.insert(middle[0]);
 		middle[0] = middle[1];
@@ -85,12 +91,18 @@ private static int calculateMedianaSpecial(int number, int i) {
 			return ((middle[1] + middle[2])/2);
 		}
 	} else {
+		// Tuve que hacer esto porque la implementacion 
+		// que encontre de heap, tiraba fruta para 4 elementos.
+		
 		int[] order = new int[4];
+		
 		for (int j = 0; j < middle.length; j++) {
 			order[j] = middle[j];
 		}
+		
 		order[3] = number;
 		Arrays.sort(order);
+		
 		for (int j = 0; j < middle.length; j++) {
 			middle[j] = order[j];
 		}

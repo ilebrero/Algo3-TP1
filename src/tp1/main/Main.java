@@ -4,8 +4,8 @@ import tp1.exercises.Exercise2;
 
 public class Main {
 
-public static void main(String...arg)
-{
+public static void main(String[] args){
+	
 	int[] array = {2,3,4,1,2};
 	int[] array1 = {2,7,2,8,4,9,1,6,5};
 	int[] array2 = {1,87,4};
@@ -36,7 +36,6 @@ public static void main(String...arg)
 	for (int i = 0; i < result3.length; i++) {
 		System.out.print(result3[i] + ",");	
 	}
-	
 	
 //	2 2 3 2 2
 //	2 4 2 4 4 5 4 5 5
