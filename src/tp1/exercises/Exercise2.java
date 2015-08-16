@@ -83,30 +83,13 @@ private static int calculateMedianaSpecial(int number, int i) {
 		middle[1] = number;
 		return number;
 	} else if (i == 1){
-		if (middle[1] > number){
-			middle[0] = number;
-			return ((middle[1] + middle[0])/2);
-		} else {
-			middle[2] = number;
-			return ((middle[1] + middle[2])/2);
-		}
+		middle[0] = number;
+		Arrays.sort(middle);
+		return ((middle[1] + middle[0])/2);
 	} else {
-		// Tuve que hacer esto porque la implementacion 
-		// que encontre de heap, tiraba fruta para 4 elementos.
-		
-		int[] order = new int[4];
-		
-		for (int j = 0; j < middle.length; j++) {
-			order[j] = middle[j];
-		}
-		
-		order[3] = number;
-		Arrays.sort(order);
-		
-		for (int j = 0; j < middle.length; j++) {
-			middle[j] = order[j];
-		}
+		middle[2] = number;
+		Arrays.sort(middle);
+		return middle[1];
 	}
-	return middle[1];
 }
 }
