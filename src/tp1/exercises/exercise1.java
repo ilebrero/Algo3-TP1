@@ -38,18 +38,22 @@ public class exercise1 {
 					cableRestante -= (array[i] - array[i-1]);
 					cantCiudades++;
 					max = Math.max(max, cantCiudades);
-					ultimaCiudadSumo[i] = true;
+					ultimaCiudadSumo[i-1] = true;
 					i++;
 				} else {
 					while (cableRestante - (array[i] - array[i-1]) <= 0 && ultimaCiudad < i){
 						if (ultimaCiudadSumo[ultimaCiudad]){
-							cableRestante += array[ultimaCiudad];
+							cableRestante += (array[ultimaCiudad+1] - array[ultimaCiudad]);
+							cantCiudades--;
 						}
 						ultimaCiudad++;
-						cantCiudades--;
+//						cantCiudades--;
 						
 					}
-					i++;
+					if (ultimaCiudad == i){
+						i++;
+					}
+//					i++;
 				}
 			}
 		if (max > 0){

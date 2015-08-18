@@ -41,9 +41,9 @@ public static void main(String[] args){
 	
 	System.out.println("Ejercicio 2:");
 	
-	int[] array5 = {6,8,12,15};
+	int[] array5 = {0,6,8,12,15};
 	System.out.println("Respuesta1 :" + exercise1.exerice1(array5, 6)+" y la esperada es 3");
-	int[] array6 = {8,14,20,40,45,54,60,67,74,89,99};
+	int[] array6 = {0,8,14,20,40,45,54,60,67,74,89,99};
 	System.out.println("Respuesta2 :" + exercise1.exerice1(array6, 35) +" y la esperada es 6");
 
 	int[] array7 ={0,35,87,141,163,183,252,288,314,356,387};
