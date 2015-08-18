@@ -1,6 +1,8 @@
 package tp1.main;
 
 import tp1.exercises.Exercise2;
+import tp1.exercises.exercise1;
+
 
 public class Main {
 
@@ -37,29 +39,31 @@ public static void main(String[] args){
 		System.out.print(result3[i] + ",");	
 	}
 	
+	System.out.println("Ejercicio 2:");
+	
+	int[] array5 = {6,8,12,15};
+	System.out.println("Respuesta1 :" + exercise1.exerice1(array5, 6)+" y la esperada es 3");
+	int[] array6 = {8,14,20,40,45,54,60,67,74,89,99};
+	System.out.println("Respuesta2 :" + exercise1.exerice1(array6, 35) +" y la esperada es 6");
+
+	int[] array7 ={0,35,87,141,163,183,252,288,314,356,387};
+	System.out.println("Respuesta3 :" + exercise1.exerice1(array7, 100) +" y la esperada es 4");
+	int[] array8 ={0,6,8,16,19,28,32,37,45,52,60,69,78,82};
+	System.out.println("Respuesta4 :" + exercise1.exerice1(array8, 90) +" y la esperada es 14");
+	int[] array13 ={0,5,13,19,26,35};
+	System.out.println("Respuesta5 :" + exercise1.exerice1(array13, 4) +" y la esperada es 0");
+	int[] array9 ={0,5,13,19,26,35};
+	System.out.println("Respuesta6 :" + exercise1.exerice1(array9, 5) +" y la esperada es 2");
+	int[] array10 ={0,7,16,19,27,33};
+	System.out.println("Respuesta7 :" + exercise1.exerice1(array10, 5) +" y la esperada es 2");
+	int[] array11 ={0,2,5,8,14,18};
+	System.out.println("Respuesta8 :" + exercise1.exerice1(array11, 8) +" y la esperada es 4");
+	int[] array12 ={0,3,6,9,15,19};
+	System.out.println("Respuesta9 :" + exercise1.exerice1(array12, 8) +" y la esperada es 3");
 //	2 2 3 2 2
 //	2 4 2 4 4 5 4 5 5
 //	1 44 4
 //	4 2 4 5 6 7
 	
-//    System.out.println("The Min Heap is ");
-//    MinHeap minHeap = new MinHeap(15);
-//    minHeap.insert(5);
-//    minHeap.insert(3);
-//    minHeap.insert(2);
-//    minHeap.insert(2);
-//    minHeap.insert(17);
-//    minHeap.insert(10);
-//    minHeap.insert(84);
-//    minHeap.insert(19);
-//    minHeap.insert(6);
-//    minHeap.insert(22);
-//    minHeap.insert(9);
-//    minHeap.minHeap();
-//
-//    minHeap.print();
-//    System.out.println("The Min val is " + minHeap.remove());
-//    System.out.println("The Min val is " + minHeap.remove());
-//    System.out.println("The Min val is " + minHeap.remove());
 }
 }

@@ -76,7 +76,8 @@ public class MinHeap
         {
             swap(current,parent(current));
             current = parent(current);
-        }	
+        }
+        this.minHeap();
     }
  
     public void print()
