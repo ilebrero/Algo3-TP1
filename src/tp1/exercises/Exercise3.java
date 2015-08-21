@@ -2,14 +2,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 import javafx.util.Pair;
 
-public class Ronda {
+public class Exercise3 {
     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         //TODO: pasar a archivos y generalizar la creacion de "ronda"
         //while(in.hasNext()){
             //levantar de consola -> el caso puesto es para el test 2 de la catedra
-            Character[] ronda ={'a','b','c','d','e'};//,'f','g','h'};
+            Character[] ronda = {'a','b','c','d','e'};//,'f','g','h'};
             String[] mejoresAmigas = in.nextLine().split(";");
             //busca permutaciones y prueba
             Pair<Pair<Integer, Integer>, Character[]> rondaFinal = optimizarRonda(ronda, mejoresAmigas, 0);
