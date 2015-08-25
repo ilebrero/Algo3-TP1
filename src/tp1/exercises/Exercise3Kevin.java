@@ -6,13 +6,14 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Exercise3Kevin {
 	private static Map<Character, Set<Character>> amistades;
     
     public static void main(String[] args) {
-    	amistades = new HashMap<Character,Set<Character> >();
+    	amistades = new TreeMap<Character,Set<Character> >();
     	
 //        Scanner in = new Scanner(System.in);
         //TODO: pasar a archivos y generalizar la creacion de "ronda"
@@ -202,6 +203,9 @@ public class Exercise3Kevin {
           for (int index=0; index <= smallerPermutated.size(); index++) {
             List<Character> temp = new ArrayList<Character>(smallerPermutated);
             temp.add(index, firstElement);
+            if (temp.size() == 5){
+            	System.out.println(temp);
+            }
             returnValue.add(temp);
             
           }

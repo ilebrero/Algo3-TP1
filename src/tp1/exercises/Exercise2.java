@@ -1,49 +1,37 @@
 package tp1.exercises;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import tp1.utils.MinHeap;
 
 public class Exercise2 {
-	private static MinHeap leftHeap ;
-	private static MinHeap rigthHeap;
-	private static int[] middle = new int[3];
+	private static Queue<Integer> leftHeap ;
+	private static Queue<Integer> rigthHeap;
+	private static int middle;
 	
 	
  public static int[] exerice2(int[] array) {
-	 for (int j = 0; j < middle.length; j++) {
-		middle[j] = Integer.MAX_VALUE;
-	 }
-	 
-	 leftHeap = new MinHeap(array.length);
-	 rigthHeap = new MinHeap(array.length);
-	 
-	 int i = 0;
-	 int[] resultArray = new int[array.length];
-	 
-	 while (i < array.length){
-		 resultArray[i] = calculateMediana(array[i],i);
-		 i++;
-	 }
-	 
-	 return resultArray;
 	
+	 leftHeap = new PriorityQueue<>(array.length);
+	 rigthHeap = new PriorityQueue<>(array.length);
+
+	 int[] resultArray = new int[array.length];
+	 for (int i = 0; i < resultArray.length; i++) {
+		 resultArray[i] = calculateMediana(array[i],i);
+	 } 
+	 return resultArray;
 }
 private static int calculateMediana(int number, int i) {
-	if (i < 3){
-		// Maneja los primeros 3 casos.
-		return calculateMedianaSpecial(number, i);
+	if (i ==  1){
+		// Maneja el primer caso.
+		middle = number;
 	} else{
-		if (number < middle[0]){
-			leftHeap.insert(number);
-		} else if (number < middle[1]){
-			leftHeap.insert(middle[1]);
-			middle[1] = number;
-		} else if (number < middle[2]){
-			rigthHeap.insert(middle[2]);
-			middle[2] = number;
+		if (number < middle){
+			leftHeap.add(number);
 		} else {
-			rigthHeap.insert(number);
+			rigthHeap.add(number);
 		}
 	}
 	
@@ -51,12 +39,12 @@ private static int calculateMediana(int number, int i) {
 	
 	if ((i+1) % 2 == 0){
 		if (rigthHeap.size() > leftHeap.size()){
-			return ((middle[2] + middle[1]) /2);
+			return ((rigthHeap.peek() + middle) /2);
 		} else {
-			return ((middle[0] + middle[1]) /2);
+			return ((leftHeap.peek() + middle) /2);
 		}
 	} else {
-		return middle[1];
+		return middle;
 	}
 
 }
@@ -65,31 +53,11 @@ private static int calculateMediana(int number, int i) {
 private static void adjustStruct(){
 	// A lo sumo debe hacer un solo movimiento.
 	if (rigthHeap.size() - leftHeap.size() > 1){
-		leftHeap.insert(middle[0]);
-		middle[0] = middle[1];
-		middle[1] = middle[2];
-		middle[2] = rigthHeap.remove();
+		leftHeap.add(middle);
+		middle = rigthHeap.remove();
 	} else if (leftHeap.size() - rigthHeap.size() > 1){
-		rigthHeap.insert(middle[2]);
-		middle[2] = middle[1];
-		middle[1] = middle[0];
-		middle[0] = leftHeap.remove();
-	}
-}
-
-
-private static int calculateMedianaSpecial(int number, int i) {
-	if (i == 0){
-		middle[1] = number;
-		return number;
-	} else if (i == 1){
-		middle[0] = number;
-		Arrays.sort(middle);
-		return ((middle[1] + middle[0])/2);
-	} else {
-		middle[2] = number;
-		Arrays.sort(middle);
-		return middle[1];
+		rigthHeap.add(middle);
+		middle = leftHeap.remove();
 	}
 }
 }
