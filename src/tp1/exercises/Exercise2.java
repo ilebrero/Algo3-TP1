@@ -1,10 +1,8 @@
 package tp1.exercises;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import tp1.utils.MinHeap;
 
 public class Exercise2 {
 	private static Queue<Integer> leftHeap ;
