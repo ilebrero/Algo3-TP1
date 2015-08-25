@@ -68,57 +68,82 @@ public class Exercise3Kevin {
             amistades.put('e',testAmistad);
             
             //abdce
-            List<Character> test4 = new ArrayList<Character>();
-            test4.add('a');
-            test4.add('b');
-            test4.add('d');
-            test4.add('c');
-            test4.add('e');
-            List<List<Character>> test = generatePerm(ronda1);
-            test.add(test4);
+            List<List<Character>> test =  generatePerm(ronda1);
+           
+            System.out.println(resolve(test));
+
+            /// Ejercicio 2.
             
-            int mejorPosiciones = Integer.MAX_VALUE;
-            List<Character> resultado = null;
-            int costo;
-            int mayorLong = Integer.MAX_VALUE;
-            int longActual;
-            for (List<Character> prueba : test){
-            	costo = calculatateCost(prueba);
-            	longActual = calculateLong(prueba);
-            	if (costo < mejorPosiciones &&  longActual <= mayorLong){
-            		mejorPosiciones = costo;
-            		resultado = prueba;
-            		mayorLong = longActual;
-            		System.out.println("entre con menor aca con : " + prueba + "con costo:" + costo + "con long:" + longActual);
-            	} else if (costo == mejorPosiciones && longActual <= mayorLong){
-            		if (prueba.get(0) == 'a'){
-            		System.out.println("entre aca con : " + prueba + "con costo:" + costo + "con long:" + longActual);
-            		}
-            		if (compareString(prueba.toString(),resultado.toString())){
-//            			System.out.println("Dio menor que : "+resultado  + prueba + "con costo:" + costo + "con long:" + longActual);
-            			resultado = prueba;
-            		}
-            	} else {
-            		if (prueba.get(0) == 'a'){
-            		System.out.println("entre aca con mayor : " + prueba + "con costo:" + costo + "con long:" + longActual);
-            		}
-            	}
-            }
-            System.out.println(resultado);
-            System.out.println(calculatateCost(test.get(test.size()-1)));
-//            System.out.println(test.toString());
-            System.out.println(test.size());
-            //muestra resultado
-//            System.out.println(rondaFinal.getKey().getKey() + " " + Arrays.toString(rondaFinal.getValue()));
-        //}[a, c, d, e, b]  abdce
+            List<Character> ronda2 = new ArrayList<Character>();
+            
+            ronda2.add('a');
+            ronda2.add('b');
+            ronda2.add('c');
+            ronda2.add('d');
+            ronda2.add('e');
+            test =  generatePerm(ronda2);
+            amistades = new HashMap<Character,Set<Character> >();
+            testAmistad = new TreeSet<>();
+            testAmistad.add('b');
+            testAmistad.add('c');
+            testAmistad.add('d');
+            amistades.put('a',testAmistad);
+            
+            // b
+            
+            testAmistad = new TreeSet<>();
+            testAmistad.add('a');
+            testAmistad.add('e');
+            amistades.put('b',testAmistad);
+            
+            // c
+            
+            testAmistad = new TreeSet<>();
+            testAmistad.add('a');
+            testAmistad.add('d');
+            amistades.put('c',testAmistad);
+            
+            // d
+            
+            testAmistad = new TreeSet<>();
+            testAmistad.add('a');
+            testAmistad.add('c');
+            amistades.put('d',testAmistad);
+            testAmistad = new TreeSet<>();
+            testAmistad.add('b');
+            amistades.put('e',testAmistad);
+            System.out.println(resolve(test));
+            
+     //       a bcd;b ae;c ad;d ac;e b
+    }
+    
+    private static List<Character> resolve(List<List<Character>> test){
+        int mejorPosiciones = Integer.MAX_VALUE;
+        List<Character> resultado = null;
+        int costo;
+        int mayorLong = Integer.MAX_VALUE;
+        int longActual;
+        for (List<Character> prueba : test){
+        	costo = calculatateCost(prueba);
+        	longActual = calculateLong(prueba);
+        	if (costo < mejorPosiciones &&  longActual <= mayorLong){
+        		mejorPosiciones = costo;
+        		resultado = prueba;
+        		mayorLong = longActual;
+        	} else if (costo == mejorPosiciones && longActual <= mayorLong){
+        		if (compareString(prueba.toString(),resultado.toString())){
+        			resultado = prueba;
+        		}
+        	} 
+        }
+        return resultado;
     }
     
     private static boolean compareString (String a, String b){
     	int i = 0;
-    	while (a.charAt(i) == b.charAt(i)){
+    	while (a.charAt(i) == b.charAt(i) ){
     		i++;
     	}
-    	
     	return a.charAt(i) < b.charAt(i);
     }
     
@@ -147,17 +172,17 @@ public class Exercise3Kevin {
     	}
 		return long1;
 	}
-    
+   
     private static int calculateDistance(List<Character> round, Character exp1, Character exp2){
 		int posExp1 = round.size();
 		int posExp2 = 0;
 		
 		for (int i = 0; i < round.size(); i++) {
-			if (round.get(i) == exp1){
+			if (round.get(i).equals(exp1)){
 				posExp1 = i;
 			}
-			if (round.get(i) == exp2){
-				posExp1 = i;
+			if (round.get(i).equals(exp2)){
+				posExp2 = i;
 			}
 		}
 		
@@ -180,87 +205,8 @@ public class Exercise3Kevin {
             returnValue.add(temp);
             
           }
-          
         }
         return returnValue;
       }
-    
-//    public static Pair<Pair<Integer, Integer>, Character[]> optimizarRonda(Character[] ronda, String[] mejoresAmigas, int permutacion){
-//        //caso base: hay una permutacion de la ronda
-//        if (permutacion == ronda.length) {
-//            Pair<Pair<Integer, Integer>, Character[]> rondaCompleta;
-//            Pair<Integer, Integer> calculos = new Pair<Integer, Integer>(calcularMaximaDistancia(ronda, mejoresAmigas), sumaDistancias(ronda, mejoresAmigas));
-//            rondaCompleta = new Pair<>(calculos, ronda);
-//            System.out.println(Arrays.toString(ronda) + " - maximo - " + rondaCompleta.getKey().getKey() + " - suma - " + rondaCompleta.getKey().getValue());
-//            return rondaCompleta;
-//        //caso general: hay una permutacion a medio crear
-//        } else {
-//            //usa la primera rama de la recursion para generar la permutacion de menor orden lexicografico
-//            Character[] nuevaRonda = ronda.clone();
-//            swap(nuevaRonda, permutacion, permutacion);
-//            Pair<Pair<Integer, Integer>, Character[]> mejorRonda = optimizarRonda(nuevaRonda, mejoresAmigas, permutacion + 1);
-//            //prueba la proxima permutacion
-//            for (int i = ronda.length - 1; i > permutacion; i--){
-//                nuevaRonda = ronda.clone();
-//                swap(nuevaRonda, permutacion, i);
-//                Pair<Pair<Integer, Integer>, Character[]> mejorRondaPermutada = optimizarRonda(nuevaRonda, mejoresAmigas, permutacion + 1);
-//                
-//                //en orden de uso: key-value = sumaDistancias | key-key = distanciaMaxima 
-//                if (mejorRondaPermutada.getKey().getValue() < mejorRonda.getKey().getValue() && mejorRondaPermutada.getKey().getKey() < mejorRonda.getKey().getKey() ) {
-//                    mejorRonda = mejorRondaPermutada;
-//                }
-//            }   
-//            return mejorRonda;
-//        }
-//    }
-//    
-    public static int sumaDistancias(Character[] ronda, String[] mejoresAmigas){
-        int sumaDistancias = 0;
-        for (int i = 0; i < mejoresAmigas.length; i++) {
-            int posNiña = obtenerPos(ronda, mejoresAmigas[i].charAt(0));
-            for (int j = 2; j < mejoresAmigas[i].length(); j++) {
-                //Calcula la menor distancia entre amigas
-                int posicionAmiga   = obtenerPos(ronda, mejoresAmigas[i].charAt(j));
-                int distancia       = Math.abs(posNiña - posicionAmiga);
-                int distanciaMinima = Integer.min(distancia, ronda.length - distancia);
-                sumaDistancias += distanciaMinima;
-            }
-        }
-        return sumaDistancias;
-    }
-    
-    //TODO: revizar por la complejidad!!
-    public static int calcularMaximaDistancia(Character[] ronda, String[] mejoresAmigas){
-        int distanciaMaxima = 0;
-        
-        for (int i = 0; i < mejoresAmigas.length; i++) {
-            int posNiña = obtenerPos(ronda, mejoresAmigas[i].charAt(0));
-        
-            for (int j = 2; j < mejoresAmigas[i].length(); j++) {
-                //Calcula la menor distancia entre amigas
-                int posicionAmiga   = obtenerPos(ronda, mejoresAmigas[i].charAt(j));
-                int distancia       = Math.abs(posNiña - posicionAmiga);
-                int distanciaMinima = Integer.min(distancia, ronda.length - distancia);
-                if(distanciaMinima > distanciaMaxima) distanciaMaxima = distanciaMinima;
-            }
-
-        }
-        
-        return distanciaMaxima;
-    }
-    
-    public static void swap(Character[] ronda, int i, int j){
-        Character aux;
-        aux      = ronda[i];
-        ronda[i] = ronda[j];
-        ronda[j] = aux;
-    }
-    
-    public static int obtenerPos(Character[] ronda, Character niña){
-        int posicion = 0;
-        while (ronda[posicion] != niña) {
-            posicion++;
-        }
-        return posicion;
-    }
+ 
 }
