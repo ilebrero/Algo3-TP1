@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Exercise3 {
@@ -8,45 +8,27 @@ public class Exercise3 {
         //TODO: pasar a archivos y generalizar la creacion de "ronda"
         //while(in.hasNext()){
             //levantar de consola -> el caso puesto es para el test 2 de la catedra
-            Ronda ronda = new Ronda({'a','b','c','d','e'});//,'f','g','h'};
-            ronda.mejoresAmigas = in.nextLine().split(";");
+            ArrayList<Character> ronda1 = new ArrayList<Character>();
+                ronda1.add('a');
+                ronda1.add('b');
+                ronda1.add('c');
+                ronda1.add('d');
+                ronda1.add('e');
+                ronda1.add('f');
+                ronda1.add('g');
+                ronda1.add('h');
+            Ronda.mejoresAmigas = in.nextLine().split(";");
+            Ronda ronda = new Ronda(ronda1);//,'f','g','h'};
             //busca permutaciones y prueba
             Ronda rondaFinal = resolveNacho(ronda, 0);
             //muestra resultado
-            System.out.println(rondaFinal.amigaMasLejana + " " + Arrays.toString(rondaFinal.ronda));
+            System.out.println(rondaFinal.amigaMasLejana + " " + (rondaFinal.ronda));
         //}
     }
-/*    
-    public static Pair<Pair<Integer, Integer>, Character[]> optimizarRonda(Character[] ronda, String[] mejoresAmigas, int permutacion){
-        //caso base: hay una permutacion de la ronda
-        if (permutacion == ronda.length) {
-            Pair<Pair<Integer, Integer>, Character[]> rondaCompleta;
-            Pair<Integer, Integer> calculos = new Pair<Integer, Integer>(calcularMaximaDistancia(ronda, mejoresAmigas), sumaDistancias(ronda, mejoresAmigas));
-            rondaCompleta = new Pair<>(calculos, ronda);
-            System.out.println(Arrays.toString(ronda) + " - maximo - " + rondaCompleta.getKey().getKey() + " - suma - " + rondaCompleta.getKey().getValue());
-            return rondaCompleta;
-        //caso general: hay una permutacion a medio crear
-        } else {
-            //usa la primera rama de la recursion para generar la permutacion de menor orden lexicografico
-            Pair<Pair<Integer, Integer>, Character[]> mejorRonda = optimizarRonda(nuevaRonda, mejoresAmigas, permutacion + 1);
-            //prueba la proxima permutacion
-            for (int i = ronda.length - 1; i > permutacion; i--){
-                swap(nuevaRonda, permutacion, i);
-                Pair<Pair<Integer, Integer>, Character[]> mejorRondaPermutada = optimizarRonda(nuevaRonda, mejoresAmigas, permutacion + 1);
-                swap(nuevaRonda, permutacion, i);
-                
-                //en orden de uso: key-value = sumaDistancias | key-key = distanciaMaxima 
-                if (mejorRondaPermutada.getKey().getValue() < mejorRonda.getKey().getValue() && mejorRondaPermutada.getKey().getKey() < mejorRonda.getKey().getKey() ) {
-                    mejorRonda = mejorRondaPermutada;
-                }
-            }   
-            return mejorRonda;
-        }
-    }
-  */  
+
     private static Ronda resolveNacho(Ronda test, int permutacion){
-        if (test.size() == permutacion) {
-            Ronda result = new Ronda(test.ronda);
+        if (test.ronda.size() == permutacion) {
+            Ronda result = new Ronda((ArrayList<Character>) test.ronda.clone());
             return result;
         } else {
                 Ronda mejorRondaActual = resolveNacho(test, permutacion + 1);
@@ -55,12 +37,12 @@ public class Exercise3 {
                     Ronda mejorRondaPermutada = resolveNacho(test, permutacion + 1);
                     test.swap(permutacion, i);
 
-                    if (mejorRondaPermutada.sumaDistancias <= mejorRondaActual.sumaDistancias && mejorRondaPermutada.amigaMasLejana < mejorRondaActual.amigaMasLejana ) {
+                    if (mejorRondaPermutada.sumaDistancias < mejorRondaActual.sumaDistancias && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana ) {
                         mejorRondaActual = mejorRondaPermutada;
                     }
                 }
-            }
             return mejorRondaActual;
         }
     }
 }
+
