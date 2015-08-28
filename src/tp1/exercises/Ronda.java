@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Integer;
 
 class Ronda{
     int sumaDistancias;
@@ -6,7 +7,6 @@ class Ronda{
 
     ArrayList<Character> ronda;
     static String[] mejoresAmigas;
-
 
     public Ronda(){}
 
@@ -39,7 +39,7 @@ class Ronda{
                 //Calcula la menor distancia entre amigas
                 int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
                 int distancia       = Math.abs(posNiña - posicionAmiga);
-                int distanciaMinima = Integer.min(distancia, ronda.size() - distancia);
+                int distanciaMinima = minimoInt(distancia, ronda.size() - distancia);
                 if(distanciaMinima > amigaMasLejana) amigaMasLejana = distanciaMinima;
             }
         }
@@ -53,10 +53,44 @@ class Ronda{
                 //Calcula la menor distancia entre amigas
                 int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
                 int distancia       = Math.abs(posNiña - posicionAmiga);
-                int distanciaMinima = Integer.min(distancia, ronda.size() - distancia);
+                int distanciaMinima = minimoInt(distancia, ronda.size() - distancia);
                 sumaDistancias += distanciaMinima;
             }
         }
+    }
+
+    public static int minimoInt(int a, int b) {
+        if (a < b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    public static char minimo(String[] amigas){
+        char min = 255;
+        for (int i = 0; i < amigas.length; i++) {
+            for (int j = 0; j < amigas[i].length(); j++) {
+                Character actual = amigas[i].charAt(j);
+                if (actual < min) {
+                    min = actual; 
+                }
+            }
+        }
+        return min;
+    }
+
+    public static char maximo(String[] amigas){
+        char max = 0;
+        for (int i = 0; i < amigas.length; i++) {
+            for (int j = 0; j < amigas[i].length(); j++) {
+                Character actual = amigas[i].charAt(j);
+                if (actual > max) {
+                    max = actual; 
+                }
+            }
+        }
+        return max;
     }
 
 }
