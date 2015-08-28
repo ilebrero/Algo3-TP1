@@ -1,6 +1,5 @@
 package tp1.exercises;
 
-
 public class exercise1 {
 	private static int max;
 	private static int cantCiudades;
@@ -17,22 +16,26 @@ public class exercise1 {
 			
 		int i = 1;
 		while ( i < caminos.length){
-			if (cableRestante - (caminos[i] - caminos[i-1]) >= 0){
+			int distanciaActual = caminos[i] - caminos[i-1]; 
+
+			if (cableRestante - distanciaActual >= 0){
 				// puede agregar una ciudad
-				cableRestante -= (caminos[i] - caminos[i-1]);
+				cableRestante -= distanciaActual;
 				cantCiudades++;
 				max = Math.max(max, cantCiudades);
 				ultimaCiudadSumo[i-1] = true;
 				i++;
 			} else {
-				while (cableRestante - (caminos[i] - caminos[i-1]) <= 0 && ultimaCiudad < i){
-					if (ultimaCiudadSumo[ultimaCiudad]){
-						cableRestante += (caminos[ultimaCiudad+1] - caminos[ultimaCiudad]);
+				while (cableRestante - distanciaActual <= 0 && ultimaCiudad < i){
+					if (ultimaCiudadSumo[ultimaCiudad]) {
+						int distanciaASacar = (caminos[ultimaCiudad+1] - caminos[ultimaCiudad]);
+						cableRestante += distanciaASacar;
 						cantCiudades--;
 					}
 					ultimaCiudad++;
 					
 				}
+				
 				if (ultimaCiudad == i){
 					i++;
 				}
@@ -42,7 +45,7 @@ public class exercise1 {
 		if (max > 0){
 			max++;
 		}
-		
+
 		return max;
 	}
 }
