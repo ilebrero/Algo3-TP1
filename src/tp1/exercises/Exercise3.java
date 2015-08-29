@@ -2,26 +2,21 @@ package tp1.exercises;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Exercise3 {
     
     public static void main(String[] args) {
         try{
-            BufferedReader is = obtenerReader("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.in");
-            BufferedWriter os = obtenerWritter("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.out");
+            BufferedReader is = Utils.obtenerReader("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.in");
+            BufferedWriter os = Utils.obtenerWritter("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.out");
            
             String line;
             while ( ( line = is.readLine() ) != null ) {
                 ArrayList<Character> ronda1 = new ArrayList<Character>();           
-                Ronda ronda = armarRonda(line, ronda1);
+                
+                Ronda ronda      = armarRonda(line, ronda1);
                 Ronda rondaFinal = mejorPermutacion(ronda, 0);
                 
                 os.append(Integer.toString(rondaFinal.amigaMasLejana));
@@ -37,30 +32,9 @@ public class Exercise3 {
 
     static Ronda armarRonda(String line, ArrayList<Character> ronda){
             Ronda.mejoresAmigas = line.split(";");
-            char min = Ronda.minimo(Ronda.mejoresAmigas);
-            char max = Ronda.maximo(Ronda.mejoresAmigas);
-            
-            completarRonda(min, max, ronda);
-            
+            Ronda.completarRonda(ronda);
             Ronda rondaArmada = new Ronda(ronda);
             return rondaArmada;
-    }
-
-    static void completarRonda(char min, char max, ArrayList<Character> ronda){
-        Set<Character> grupo = new TreeSet<>();
-        
-        for (String amigas : Ronda.mejoresAmigas) {
-            for (int i = 0; i < amigas.length(); i++) {
-                char actual = amigas.charAt(i);
-                if (actual != ' ') {
-                    grupo.add(actual);
-                }
-            }
-        }
-        
-        for (Character persona : grupo) {
-            ronda.add(persona);
-        }
     }
 
     private static Ronda mejorPermutacion(Ronda test, int permutacion){
@@ -84,15 +58,4 @@ public class Exercise3 {
             return mejorRondaActual;
         }
     }
-
-    public static BufferedReader obtenerReader(String file) throws FileNotFoundException, IOException{
-        return new BufferedReader( new InputStreamReader( new FileInputStream(file) ) ); 
-    }
-
-    public static BufferedWriter obtenerWritter(String file) throws FileNotFoundException, IOException{
-        return new BufferedWriter( new FileWriter( file ) );
-    }
-
-
 }
-

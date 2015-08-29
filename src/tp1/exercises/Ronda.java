@@ -2,6 +2,8 @@ package tp1.exercises;
 
 import java.util.ArrayList;
 import java.lang.Integer;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Ronda{
     int sumaDistancias;
@@ -69,30 +71,20 @@ public class Ronda{
         }
     }
 
-    public static char minimo(String[] amigas){
-        char min = 255;
-        for (int i = 0; i < amigas.length; i++) {
-            for (int j = 0; j < amigas[i].length(); j++) {
-                Character actual = amigas[i].charAt(j);
-                if (actual < min) {
-                    min = actual; 
+    static void completarRonda(ArrayList<Character> ronda){
+        Set<Character> grupo = new TreeSet<>();
+
+        for (String amigas : Ronda.mejoresAmigas) {
+            for (int i = 0; i < amigas.length(); i++) {
+                char actual = amigas.charAt(i);
+                if (actual != ' ') {
+                    grupo.add(actual);
                 }
             }
         }
-        return min;
-    }
 
-    public static char maximo(String[] amigas){
-        char max = 0;
-        for (int i = 0; i < amigas.length; i++) {
-            for (int j = 0; j < amigas[i].length(); j++) {
-                Character actual = amigas[i].charAt(j);
-                if (actual > max) {
-                    max = actual; 
-                }
-            }
+        for (Character persona : grupo) {
+            ronda.add(persona);
         }
-        return max;
     }
-
 }
