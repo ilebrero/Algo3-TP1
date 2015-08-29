@@ -14,17 +14,15 @@ import java.util.TreeSet;
 public class Exercise3 {
     
     public static void main(String[] args) {
-        System.out.println("asdasds");
         try{
             BufferedReader is = obtenerReader("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.in");
             BufferedWriter os = obtenerWritter("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.out");
            
             String line;
             while ( ( line = is.readLine() ) != null ) {
-                
                 ArrayList<Character> ronda1 = new ArrayList<Character>();           
                 Ronda ronda = armarRonda(line, ronda1);
-                Ronda rondaFinal = resolveNacho(ronda, 0);
+                Ronda rondaFinal = mejorPermutacion(ronda, 0);
                 
                 os.append(Integer.toString(rondaFinal.amigaMasLejana));
                 os.append(" ");
@@ -50,6 +48,7 @@ public class Exercise3 {
 
     static void completarRonda(char min, char max, ArrayList<Character> ronda){
         Set<Character> grupo = new TreeSet<>();
+        
         for (String amigas : Ronda.mejoresAmigas) {
             for (int i = 0; i < amigas.length(); i++) {
                 char actual = amigas.charAt(i);
@@ -64,16 +63,16 @@ public class Exercise3 {
         }
     }
 
-    private static Ronda resolveNacho(Ronda test, int permutacion){
+    private static Ronda mejorPermutacion(Ronda test, int permutacion){
         if (test.ronda.size() == permutacion) {
             Ronda result = new Ronda((ArrayList<Character>) test.ronda.clone());
             return result;
         } else {
-                Ronda mejorRondaActual = resolveNacho(test, permutacion + 1);
+                Ronda mejorRondaActual = mejorPermutacion(test, permutacion + 1);
             
                 for(int i = permutacion + 1; i < test.ronda.size(); i++){
                     test.swap(permutacion, i);
-                    Ronda mejorRondaPermutada = resolveNacho(test, permutacion + 1);
+                    Ronda mejorRondaPermutada = mejorPermutacion(test, permutacion + 1);
                     test.swap(permutacion, i);
 
                     if (mejorRondaPermutada.sumaDistancias < mejorRondaActual.sumaDistancias && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana ) {
