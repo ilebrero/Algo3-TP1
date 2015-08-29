@@ -1,7 +1,9 @@
+package tp1.exercises;
+
 import java.util.ArrayList;
 import java.lang.Integer;
 
-class Ronda{
+public class Ronda{
     int sumaDistancias;
     int amigaMasLejana;
 

@@ -1,3 +1,5 @@
+package tp1.exercises;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -6,27 +8,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Exercise3 {
     
     public static void main(String[] args) {
+        System.out.println("asdasds");
         try{
-            BufferedReader is = obtenerReader("../Tests/Tp1Ej1.in");
-            BufferedWriter os = obtenerWritter("../Tests/Tp1Ej1.out");
+            BufferedReader is = obtenerReader("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.in");
+            BufferedWriter os = obtenerWritter("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.out");
            
-            //TODO: pasar a archivos y generalizar la creacion de "ronda"
             String line;
             while ( ( line = is.readLine() ) != null ) {
                 
                 ArrayList<Character> ronda1 = new ArrayList<Character>();           
                 Ronda ronda = armarRonda(line, ronda1);
                 Ronda rondaFinal = resolveNacho(ronda, 0);
-
-                os.append( rondaFinal.amigaMasLejana + " " + (rondaFinal.ronda) );
-                System.out.println(rondaFinal.amigaMasLejana + " " + (rondaFinal.ronda));
+                
+                os.append(Integer.toString(rondaFinal.amigaMasLejana));
+                os.append(" ");
+                os.append(rondaFinal.ronda.toString());
+                os.append("\n");
             }
             os.close();
-        }catch(IOException e){}
+        }catch(IOException e){
+            System.out.println(e);
+        }
     }
 
     static Ronda armarRonda(String line, ArrayList<Character> ronda){
@@ -36,18 +44,23 @@ public class Exercise3 {
             
             completarRonda(min, max, ronda);
             
-            return new Ronda(ronda);
+            Ronda rondaArmada = new Ronda(ronda);
+            return rondaArmada;
     }
 
     static void completarRonda(char min, char max, ArrayList<Character> ronda){
-        Set<Character> grupo = new TreeSet<Character>;
-        for (int i = 0; i < ronda.size() ; i++) {
-            if (ronda.get(i) != " ") {
-               grupo.add(ronda.get(i));
+        Set<Character> grupo = new TreeSet<>();
+        for (String amigas : Ronda.mejoresAmigas) {
+            for (int i = 0; i < amigas.length(); i++) {
+                char actual = amigas.charAt(i);
+                if (actual != ' ') {
+                    grupo.add(actual);
+                }
             }
         }
+        
         for (Character persona : grupo) {
-            ronda.add(grupo.get(i);                
+            ronda.add(persona);
         }
     }
 
