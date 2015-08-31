@@ -22,7 +22,7 @@ public class Exercise2 {
 	 return resultArray;
 }
 private static int calculateMediana(int number, int i) {
-	if (i ==  1){
+	if (i ==  0){
 		// Maneja el primer caso.
 		middle = number;
 	} else{
