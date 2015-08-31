@@ -38,7 +38,7 @@ public class Exercise3 {
         }
     }
     
-    public static ArrayList leerInput(BufferedReader is) throws IOException{
+    public static ArrayList<String> leerInput(BufferedReader is) throws IOException{
         String line;
         ArrayList<String> inputs = new ArrayList<String>();
         
