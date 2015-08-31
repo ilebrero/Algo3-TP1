@@ -1,5 +1,10 @@
 package tp1.exercises;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import tp1.utils.Utils;
+
 public class exercise1 {
 	private static int max;
 	private static int cantCiudades;
@@ -7,6 +12,32 @@ public class exercise1 {
 	private static int ultimaCiudad;
 	private static boolean puedeSeguir;
 	
+    public static void main(String args[]){
+        BufferedReader is;
+        BufferedWriter os;
+        
+        try{
+            is = Utils.obtenerReader("Tp1Ej1.in");
+            os = Utils.obtenerWritter("Tp1Ej1.out");
+
+            String line;
+            while ( ( line = is.readLine() ) != null ) {
+            	int longCable;
+            	int[] caminos;
+
+                longCable = Integer.parseInt(line);
+                caminos   = Utils.stringToVecInt( is.readLine() );
+                
+            	int maximaCantCaminos = exerice1(caminos, longCable);
+            	String resultado      = Integer.toString(maximaCantCaminos);
+                
+            	os.append( resultado + "\n");
+            }
+            os.close();
+        } catch(IOException e){
+            System.out.println("ocurrio un error en el input: " + e.getMessage());
+        }
+    }     
 	public static int exerice1(int[] caminos,int longCable) {
 		boolean[] ultimaCiudadSumo = new boolean[caminos.length];
 		cableRestante = longCable;

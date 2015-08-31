@@ -1,5 +1,6 @@
 package tp1.exercises;
 
+import tp1.utils.Utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,8 +10,8 @@ public class Exercise3 {
     
     public static void main(String[] args) {
         try{
-            BufferedReader is = Utils.obtenerReader("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.in");
-            BufferedWriter os = Utils.obtenerWritter("C:\\Users\\nacho\\Documents\\GitHub\\Algo3TP1\\src\\tp1\\Tests\\Tp1Ej3.out");
+            BufferedReader is = Utils.obtenerReader("Tp1Ej3.in");
+            BufferedWriter os = Utils.obtenerWritter("Tp1Ej3.out");
            
             String line;
             while ( ( line = is.readLine() ) != null ) {
@@ -26,7 +27,7 @@ public class Exercise3 {
             }
             os.close();
         }catch(IOException e){
-            System.out.println(e);
+            System.out.println("ocurrio un error en el input: " + e.getMessage());
         }
     }
 
