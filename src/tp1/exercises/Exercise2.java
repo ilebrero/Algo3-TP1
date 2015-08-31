@@ -3,84 +3,56 @@ package tp1.exercises;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import tp1.utils.Utils;
 
 
 public class Exercise2 {
-	private static Queue<Integer> leftHeap ;
-	private static Queue<Integer> rigthHeap;
-	private static int middle;
+    private static Queue<Integer> leftHeap ;
+    private static Queue<Integer> rigthHeap;
+    private static int middle;
 	
-        
-    public static void main(String args[]){
-        BufferedReader is;
-        BufferedWriter os;
-        
-        try{
-            is = Utils.obtenerReader("Tp1Ej2.in");
-            os = Utils.obtenerWritter("Tp1Ej2.out");
+    public static Integer[] exerice2(Integer[] array) {
 
-            String line;
-            while ( ( line = is.readLine() ) != null ) {
-                System.out.println("pase por aca - " + line);
-                int[]  mediana;
-            	int[]  valores;
-                String resultado;
-                
-                valores = Utils.stringToVecInt( line );
-            	
-                mediana   = exerice2(valores);
-            	resultado = Utils.vecIntToString(mediana);
-                
-            	os.append( resultado + "\n");
-            }
-            os.close();
-        } catch(IOException e){
-            System.out.println("ocurrio un error en el input: " + e.getMessage());
-        }
-    }
-	
- public static int[] exerice2(int[] array) {
-	
-	 leftHeap  = new PriorityQueue<>(array.length);
-	 rigthHeap = new PriorityQueue<>(array.length);
+            leftHeap  = new PriorityQueue<>(array.length);
+            rigthHeap = new PriorityQueue<>(array.length);
 
-	 int[] resultArray = new int[array.length];
-	 for (int i = 0; i < resultArray.length; i++) {
-		 resultArray[i] = calculateMediana(array[i],i);
-	 } 
-	 return resultArray;
-}
-private static int calculateMediana(int number, int i) {
-	if (i ==  1){
-		// Maneja el primer caso.
-		middle = number;
-	} else{
-		if (number < middle){
-			leftHeap.add(number);
-		} else {
-			rigthHeap.add(number);
-		}
-	}
-	
-	adjustStruct();
-	
-	if ((i+1) % 2 == 0){
-		if (rigthHeap.size() > leftHeap.size()){
-			return ((rigthHeap.peek() + middle) /2);
-		} else {
-			return ((leftHeap.peek() + middle) /2);
-		}
-	} else {
-		return middle;
-	}
+            Integer[] resultArray = new Integer[array.length];
+            for (int i = 0; i < resultArray.length; i++) {
+                    resultArray[i] = calculateMediana(array[i],i);
+            } 
+            return resultArray;
+   }
+   private static int calculateMediana(int number, int i) {
+           if (i ==  0){
+                   // Maneja el primer caso.
+                   middle = number;
+           } else{
+                   if (number < middle){
+                           leftHeap.add(number);
+                   } else {
+                           rigthHeap.add(number);
+                   }
+           }
 
-}
+           adjustStruct();
+
+           if ((i+1) % 2 == 0){
+                   if (rigthHeap.size() > leftHeap.size()){
+                           return ((rigthHeap.peek() + middle) /2);
+                   } else {
+                           return ((leftHeap.peek() + middle) /2);
+                   }
+           } else {
+                   return middle;
+           }
+
+   }
 
 
-private static void adjustStruct(){
+    private static void adjustStruct(){
 	// A lo sumo debe hacer un solo movimiento.
 	if (rigthHeap.size() - leftHeap.size() > 1){
 		leftHeap.add(middle);
@@ -89,5 +61,30 @@ private static void adjustStruct(){
 		rigthHeap.add(middle);
 		middle = leftHeap.remove();
 	}
-}
+    }
+
+    public static ArrayList<Integer[]> leerInput(BufferedReader is) throws IOException{
+        String line;
+        ArrayList<Integer[]> inputs = new ArrayList<>();
+        
+        while ( ( line = is.readLine() ) != null ) {
+            inputs.add( Utils.stringToVecInt(line) );
+        }
+        
+        return inputs;
+    }
+ 
+    public static String procesar(Integer[] input){
+        Integer[] procesado = exerice2(input);
+        String resultado    = Utils.vecIntToString(procesado);
+        
+        return resultado;
+    }
+
+    public static void guardarResultado(BufferedWriter os, ArrayList<String> resultados) throws IOException{
+        for (String resultado : resultados) {
+            os.append(resultado + "\n");
+        }
+    }
+
 }

@@ -3,7 +3,9 @@ package tp1.exercises;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import tp1.utils.Utils;
+import tp1.utils.ContenedorCaminos;
 
 public class exercise1 {
 	private static int max;
@@ -11,34 +13,8 @@ public class exercise1 {
 	private static int cableRestante;
 	private static int ultimaCiudad;
 	private static boolean puedeSeguir;
-	
-    public static void main(String args[]){
-        BufferedReader is;
-        BufferedWriter os;
-        
-        try{
-            is = Utils.obtenerReader("Tp1Ej1.in");
-            os = Utils.obtenerWritter("Tp1Ej1.out");
 
-            String line;
-            while ( ( line = is.readLine() ) != null ) {
-            	int longCable;
-            	int[] caminos;
-
-                longCable = Integer.parseInt(line);
-                caminos   = Utils.stringToVecInt( is.readLine() );
-                
-            	int maximaCantCaminos = exerice1(caminos, longCable);
-            	String resultado      = Integer.toString(maximaCantCaminos);
-                
-            	os.append( resultado + "\n");
-            }
-            os.close();
-        } catch(IOException e){
-            System.out.println("ocurrio un error en el input: " + e.getMessage());
-        }
-    }     
-	public static int exerice1(int[] caminos,int longCable) {
+	public static int exerice1(Integer[] caminos,int longCable) {
 		boolean[] ultimaCiudadSumo = new boolean[caminos.length];
 		cableRestante = longCable;
 		cantCiudades  = 0;
@@ -79,4 +55,36 @@ public class exercise1 {
 
 		return max;
 	}
+        
+    public static ArrayList leerInput(BufferedReader is) throws IOException{
+        String line;
+        ArrayList<ContenedorCaminos> inputs = new ArrayList<>();
+
+        while ( ( line = is.readLine() ) != null ) {
+            int longCable = Integer.parseInt(line);
+            Integer[] caminos   = Utils.stringToVecInt( is.readLine() );
+            
+            ContenedorCaminos camino;
+            camino = new ContenedorCaminos(longCable, caminos);
+                
+            inputs.add( camino );
+        }
+        
+        return inputs;
+    }
+ 
+    public static String procesar(ContenedorCaminos input){
+        
+        Integer procesado = exerice1(input.caminos, input.longitud);
+        String resultado  = String.valueOf(procesado);
+        
+        return resultado;
+    }
+
+    public static void guardarResultado(BufferedWriter os, ArrayList<String> resultados) throws IOException{
+        for (String resultado : resultados) {
+            os.append(resultado + "\n");
+        }
+    }
+
 }

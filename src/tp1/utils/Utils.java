@@ -7,9 +7,62 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Utils{
-	
+ 
+    public static ArrayList leerInputs(String file, int ejercicio){
+        BufferedReader is;
+        ArrayList result = null;
+        
+        try{
+            is = Utils.obtenerReader(file);
+            
+            switch(ejercicio){
+                case(1):
+                    result = tp1.exercises.exercise1.leerInput(is);
+                break;
+                case(2):
+                    result = tp1.exercises.Exercise2.leerInput(is);
+                break;
+                case(3):
+                    result = tp1.exercises.Exercise3.leerInput(is);
+                break;
+            }
+            
+            return result;
+        } catch(IOException e){
+            System.out.println("ocurrio un error en el input: " + e.getMessage());
+            return null;
+        }
+
+    }
+    
+    public static void guardarResultados(String file, ArrayList resultados, int ejercicio){
+        BufferedWriter os;
+        try{
+            os = Utils.obtenerWritter(file);
+            
+            switch(ejercicio){
+                case(1):
+                    tp1.exercises.exercise1.guardarResultado(os, resultados);
+                break;
+                case(2):
+                    tp1.exercises.Exercise2.guardarResultado(os, resultados);
+                break;
+                case(3):
+                    tp1.exercises.Exercise3.guardarResultado(os, resultados);
+                break;
+            }
+            
+            os.close();
+            
+            
+        }catch(IOException e){
+            System.out.println("ocurrio un error en el input: " + e.getMessage());
+        }
+    }
+    
     public static BufferedReader obtenerReader(String file) throws FileNotFoundException, IOException{
         File fld = new File("");
         String path = fld.getAbsolutePath() + "/src/tp1/Tests/" + file;
@@ -22,11 +75,11 @@ public class Utils{
         return new BufferedWriter( new FileWriter(path) );
     }
 
-    public static int[] stringToVecInt(String valores){
+    public static Integer[] stringToVecInt(String valores){
     	String[] vectorResultado;
         
         vectorResultado = valores.split(" ");
-    	int[] resultado = new int[vectorResultado.length];
+    	Integer[] resultado = new Integer[vectorResultado.length];
 
     	for (int i = 0; i < vectorResultado.length; i++) {
     		resultado[i] = Integer.parseInt(vectorResultado[i]);
@@ -35,7 +88,7 @@ public class Utils{
     	return resultado;
     }
     
-    public static String vecIntToString(int[] valores){
+    public static String vecIntToString(Integer[] valores){
     	String resultado = "";
         
     	for (int i = 0; i < valores.length-1; i++) {
