@@ -6,11 +6,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Ronda{
-    int sumaDistancias;
-    int amigaMasLejana;
+    public int sumaDistancias;
+    public int amigaMasLejana;
 
-    ArrayList<Character> ronda;
-    static String[] mejoresAmigas;
+    public ArrayList<Character> ronda;
+    public static String[] mejoresAmigas;
 
     public Ronda(){}
 

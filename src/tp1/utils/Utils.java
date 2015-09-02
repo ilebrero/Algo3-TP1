@@ -20,13 +20,13 @@ public class Utils{
             
             switch(ejercicio){
                 case(1):
-                    result = tp1.exercises.exercise1.leerInput(is);
+                    result = tp1.utils.TesterEj1.leerInput(is);
                 break;
                 case(2):
-                    result = tp1.exercises.Exercise2.leerInput(is);
+                    result = tp1.utils.TesterEj2.leerInput(is);
                 break;
                 case(3):
-                    result = tp1.exercises.Exercise3.leerInput(is);
+                    result = tp1.utils.TesterEj3.leerInput(is);
                 break;
             }
             
@@ -45,13 +45,13 @@ public class Utils{
             
             switch(ejercicio){
                 case(1):
-                    tp1.exercises.exercise1.guardarResultado(os, resultados);
+                    tp1.utils.TesterEj1.guardarResultado(os, resultados);
                 break;
                 case(2):
-                    tp1.exercises.Exercise2.guardarResultado(os, resultados);
+                    tp1.utils.TesterEj2.guardarResultado(os, resultados);
                 break;
                 case(3):
-                    tp1.exercises.Exercise3.guardarResultado(os, resultados);
+                    tp1.utils.TesterEj3.guardarResultado(os, resultados);
                 break;
             }
             
@@ -65,13 +65,13 @@ public class Utils{
     
     public static BufferedReader obtenerReader(String file) throws FileNotFoundException, IOException{
         File fld = new File("");
-        String path = fld.getAbsolutePath() + "/src/tp1/Tests/" + file;
+        String path = fld.getAbsolutePath() + "/tp1/Tests/" + file;
         return new BufferedReader( new FileReader(path) );
     }
 
     public static BufferedWriter obtenerWritter(String file) throws FileNotFoundException, IOException{
         File fld = new File("");
-        String path = fld.getAbsolutePath() +"/src/tp1/Tests/" + file;
+        String path = fld.getAbsolutePath() +"/tp1/Tests/" + file;
         return new BufferedWriter( new FileWriter(path) );
     }
 

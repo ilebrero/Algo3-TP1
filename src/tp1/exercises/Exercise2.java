@@ -1,13 +1,7 @@
 package tp1.exercises;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import tp1.utils.Utils;
-
 
 public class Exercise2 {
     private static Queue<Integer> leftHeap ;
@@ -59,30 +53,6 @@ public class Exercise2 {
         } else if (leftHeap.size() - rigthHeap.size() > 1){
             rigthHeap.add(middle);
             middle = leftHeap.remove();
-        }
-    }
-
-    public static ArrayList<Integer[]> leerInput(BufferedReader is) throws IOException{
-        String line;
-        ArrayList<Integer[]> inputs = new ArrayList<>();
-        
-        while ( ( line = is.readLine() ) != null ) {
-            inputs.add( Utils.stringToVecInt(line) );
-        }
-        
-        return inputs;
-    }
- 
-    public static String procesar(Integer[] input){
-        Integer[] procesado = exerice2(input);
-        String resultado    = Utils.vecIntToString(procesado);
-        
-        return resultado;
-    }
-
-    public static void guardarResultado(BufferedWriter os, ArrayList<String> resultados) throws IOException{
-        for (String resultado : resultados) {
-            os.append(resultado + "\n");
         }
     }
 

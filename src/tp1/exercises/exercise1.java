@@ -1,19 +1,11 @@
 package tp1.exercises;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import tp1.utils.Utils;
-import tp1.utils.ContenedorCaminos;
-
 public class exercise1 {
 	private static int max;
 	private static int cantCiudades;
 	private static int cableRestante;
 	private static int ultimaCiudad;
-	private static boolean puedeSeguir;
-
+	
 	public static int exerice1(Integer[] caminos,int longCable) {
 		boolean[] ultimaCiudadSumo = new boolean[caminos.length];
 		cableRestante = longCable;
@@ -56,35 +48,5 @@ public class exercise1 {
 		return max;
 	}
         
-    public static ArrayList leerInput(BufferedReader is) throws IOException{
-        String line;
-        ArrayList<ContenedorCaminos> inputs = new ArrayList<>();
-
-        while ( ( line = is.readLine() ) != null ) {
-            int longCable = Integer.parseInt(line);
-            Integer[] caminos   = Utils.stringToVecInt( is.readLine() );
-            
-            ContenedorCaminos camino;
-            camino = new ContenedorCaminos(longCable, caminos);
-                
-            inputs.add( camino );
-        }
-        
-        return inputs;
-    }
- 
-    public static String procesar(ContenedorCaminos input){
-        
-        Integer procesado = exerice1(input.caminos, input.longitud);
-        String resultado  = String.valueOf(procesado);
-        
-        return resultado;
-    }
-
-    public static void guardarResultado(BufferedWriter os, ArrayList<String> resultados) throws IOException{
-        for (String resultado : resultados) {
-            os.append(resultado + "\n");
-        }
-    }
-
+    
 }
