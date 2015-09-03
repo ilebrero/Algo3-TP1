@@ -1,6 +1,8 @@
 package tp1.main;
 
 import java.util.ArrayList;
+
+import tp1.exercises.Ronda;
 import tp1.utils.TesterEj1;
 import tp1.utils.TesterEj2;
 import tp1.utils.TesterEj3;
@@ -35,6 +37,19 @@ public class Main {
 
         Utils.guardarResultados("Tp1Ej1.out", resultados, 1);
     }
+    
+    public static int testCatedraEj1Params(String i,int longCable){
+    	i = "0 " + i;
+        ContenedorCaminos inputs;
+        Integer[] caminos = Utils.stringToVecInt(i);
+        inputs = new ContenedorCaminos(longCable, caminos);
+        return Integer.parseInt(TesterEj1.procesar(inputs));
+
+    }
+    
+    public static String testCatedraEj2Params(String i){
+    	return TesterEj2.procesar(Utils.stringToVecInt(i));
+    }
 
     public static void testCatedraEj2(){
         ArrayList<Integer[]> inputs;
@@ -50,6 +65,19 @@ public class Main {
         Utils.guardarResultados("Tp1Ej2.out", resultados, 2);
     }
     
+    public static String testCatedraEj3Params(String input){
+
+        Ronda rondaFinal = TesterEj3.procesar(input);
+        String resultado = Integer.toString(rondaFinal.amigaMasLejana) + " ";
+
+        for (int i =  0; i < rondaFinal.ronda.size(); i++) {
+        	resultado = resultado + rondaFinal.ronda.get(i);
+        }
+
+        return resultado;
+
+    }
+    
     public static void testCatedraEj3(){
         ArrayList<String> inputs;
         ArrayList<String> resultados;
@@ -57,9 +85,9 @@ public class Main {
         inputs     = Utils.leerInputs("Tp1Ej3.in", 3);
         resultados = new ArrayList<String>();
 
-        for(String input : inputs) {
-            resultados.add(TesterEj3.procesar(input));
-        }
+//        for(String input : inputs) {
+//            resultados.add(TesterEj3.procesar(input));
+//        }
 
         Utils.guardarResultados("Tp1Ej3.out", resultados, 3);
     }
@@ -104,13 +132,14 @@ public class Main {
     public static void testCatedraTiempoEj3(){
         ArrayList<String> inputs;
         ArrayList<String> resultados;
-
+        Ronda ronda;
         inputs     = Utils.leerInputs("Tp1Ej3.in", 3);
         resultados = new ArrayList<String>();
 
         for(String input : inputs) {
         	double tiempo = System.nanoTime();
-            resultados.add(TesterEj3.procesar(input));
+        	ronda = TesterEj3.procesar(input);
+            resultados.add(ronda.amigaMasLejana+" "+ronda.ronda.toString());
         	tiempo = System.nanoTime() - tiempo;
         	System.out.println("tiempo: " + tiempo);
         }

@@ -12,7 +12,7 @@ public class TesterEj1 {
 
         while ( ( line = is.readLine() ) != null ) {
             int longCable = Integer.parseInt(line);
-            Integer[] caminos   = Utils.stringToVecInt( is.readLine() );
+            Integer[] caminos   = Utils.stringToVecInt("0 " + is.readLine() );
             
             ContenedorCaminos camino;
             camino = new ContenedorCaminos(longCable, caminos);

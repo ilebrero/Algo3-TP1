@@ -27,9 +27,9 @@ public class Ronda{
         ronda.set(j, aux);
     }
 
-    public int obtenerPos(Character niña){
+    public int obtenerPos(Character ni){
         int posicion = 0;
-        while (this.ronda.get(posicion) != niña) {
+        while (this.ronda.get(posicion) != ni) {
             posicion++;
         }
         return posicion;
@@ -38,12 +38,12 @@ public class Ronda{
     public void calcularMaximaDistancia(){
         amigaMasLejana = 0;
         for (String mejoresAmiga : mejoresAmigas) {
-            int posNiña = obtenerPos(mejoresAmiga.charAt(0));
+            int posNina = obtenerPos(mejoresAmiga.charAt(0));
             for (int j = 2; j < mejoresAmiga.length(); j++) {
                 //Calcula la menor distancia entre amigas
                 int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
-                int distancia       = Math.abs(posNiña - posicionAmiga);
-                int distanciaMinima = minimoInt(distancia, ronda.size() - distancia);
+                int distancia       = Math.abs(posNina - posicionAmiga);
+                int distanciaMinima = Math.min(distancia, ronda.size() - distancia);
                 if(distanciaMinima > amigaMasLejana) amigaMasLejana = distanciaMinima;
             }
         }
@@ -52,11 +52,11 @@ public class Ronda{
     public void sumaDistancias(){
         sumaDistancias = 0;
         for (String mejoresAmiga : mejoresAmigas) {
-            int posNiña = obtenerPos(mejoresAmiga.charAt(0));
+            int posNina = obtenerPos(mejoresAmiga.charAt(0));
             for (int j = 2; j < mejoresAmiga.length(); j++) {
                 //Calcula la menor distancia entre amigas
                 int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
-                int distancia       = Math.abs(posNiña - posicionAmiga);
+                int distancia       = Math.abs(posNina - posicionAmiga);
                 int distanciaMinima = minimoInt(distancia, ronda.size() - distancia);
                 sumaDistancias += distanciaMinima;
             }

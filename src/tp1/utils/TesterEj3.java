@@ -21,13 +21,12 @@ public class TesterEj3 {
         return inputs;
     }
  
-    public static String procesar(String input){
+    public static Ronda procesar(String input){
         ArrayList<Character> ronda1 = new ArrayList<Character>();           
 
         Ronda ronda      = Exercise3.armarRonda(input, ronda1);
         Ronda rondaFinal = Exercise3.mejorPermutacion(ronda, 0);        
-        String resultado = Integer.toString(rondaFinal.amigaMasLejana) + " " + rondaFinal.ronda.toString();
-        return resultado;
+        return rondaFinal;
     }
 
     public static void guardarResultado(BufferedWriter os, ArrayList<String> resultados) throws IOException{

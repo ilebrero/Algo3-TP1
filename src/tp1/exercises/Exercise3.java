@@ -22,14 +22,22 @@ public class Exercise3 {
                     test.swap(permutacion, i);
                     Ronda mejorRondaPermutada = mejorPermutacion(test, permutacion + 1);
                     test.swap(permutacion, i);
-
                     if (mejorRondaPermutada.sumaDistancias < mejorRondaActual.sumaDistancias && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana ) {
-                        mejorRondaActual = mejorRondaPermutada;
-                    }
-                
+                    	mejorRondaActual = mejorRondaPermutada;
+                    } else if (mejorRondaPermutada.sumaDistancias ==  mejorRondaActual.sumaDistancias  && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana )
+                        if (compareString(mejorRondaPermutada.ronda.toString(),mejorRondaActual.ronda.toString())){
+                        	mejorRondaActual = mejorRondaPermutada;    
+                        }
                 }
 
             return mejorRondaActual;
         }
+    }
+    private static boolean compareString (String a, String b){
+    	int i = 0;
+    	while (a.charAt(i) == b.charAt(i) ){
+    		i++;
+    	}
+    	return a.charAt(i) < b.charAt(i);
     }
 }
