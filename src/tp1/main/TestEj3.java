@@ -65,10 +65,25 @@ public class TestEj3 {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void generateAllbestCase() {
-		
-	}
+		String string;
+		double tiempo ;
+		double[] tiempos;
+		for (int i = 1; i < 100; i++) {
+			tiempos = new double[5];
+			string = generateFriendships(i, 1);
+			for (int j = 0; j < tiempos.length; j++) {
+				tiempo = System.nanoTime();
+				tp1.main.Main.testCatedraEj3Params(string);
+				tiempo = System.nanoTime() - tiempo;
+				tiempos[j] = tiempo;
+			}
+			
+			System.out.print(obtenerPromedio(tiempos) + ";");
+			
+		}
+	}*/
 	
 	@Test
 	public void generateAllworstCase() {
@@ -76,9 +91,9 @@ public class TestEj3 {
 		String string;
 		double tiempo ;
 		double[] tiempos;
-		for (int i = 1; i < 10; i++) {
+		for (int i = 14; i < 15; i++) {
 			tiempos = new double[5];
-			string = generateFriendships(i);
+			string = generateFriendships(i, i);
 			for (int j = 0; j < tiempos.length; j++) {
 				tiempo = System.nanoTime();
 				tp1.main.Main.testCatedraEj3Params(string);
@@ -91,18 +106,21 @@ public class TestEj3 {
 		}
 	}
 
-	public String generateFriendships(int elements) {
+	public String generateFriendships(int elements, int friendships) {
 		String result = "";
 		
 		for (int i = 0; i < elements; i++) {
-			result = result + String.valueOf(i) + " ";
+			//Para que empiecen de la "a" sumo 97
+			result = result + (char)(97 + i) + " ";
 		
-			for (int j = 0; j < elements; j++) {
-				result = result + String.valueOf(j);
+			for (int j = 0; j < friendships; j++) {
+				result = result + (char)(97 + j);
 			}
 		
 			result = result + ";";
 		}
+		
+		System.out.println(result);
 		
 		return result;
 	}
