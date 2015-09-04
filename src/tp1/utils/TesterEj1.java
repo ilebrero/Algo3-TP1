@@ -25,7 +25,7 @@ public class TesterEj1 {
  
     public static String procesar(ContenedorCaminos input){
         
-        Integer procesado = tp1.exercises.exercise1.exerice1(input.caminos, input.longitud);
+        Integer procesado = tp1.exercises.Exercise1.exerice1(input.caminos, input.longitud);
         String resultado  = String.valueOf(procesado);
         
         return resultado;

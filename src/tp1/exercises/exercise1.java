@@ -1,6 +1,6 @@
 package tp1.exercises;
 
-public class exercise1 {
+public class Exercise1 {
 	private static int max;
 	private static int cantCiudades;
 	private static int cableRestante;

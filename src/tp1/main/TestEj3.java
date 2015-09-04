@@ -53,24 +53,25 @@ public class TestEj3 {
 
 	@Test
 	public void worstCase() {
-		for (int i = 0; i < 1000000; i++) {
-//			tp1.main.Main.testCatedraEj3Params("1 2 4 5 7 8 6 4 5 7 8 9 4 5 8 7 4 2 1 4 7 8 5 8 1000",200);
-		}
+		String string;
+		string = generateFriendships(8, 8);
+		tp1.main.Main.testCatedraEj3Params(string);
 	}
 
 	@Test
 	public void bestCase() {
-		for (int i = 0; i < 1000000; i++) {
-//			tp1.main.Main.testCatedraEj3Params("1 2 4 5 7 8 6 4 5 7 8 9 4 5 8 7 4 2 1 4 7 8 5 8 1000",2000);
-		}
+		String string;
+		string = generateFriendships(8, 1);
+		tp1.main.Main.testCatedraEj3Params(string);
+		
 	}
 	
-	/*@Test
+	@Test
 	public void generateAllbestCase() {
 		String string;
 		double tiempo ;
 		double[] tiempos;
-		for (int i = 1; i < 100; i++) {
+		for (int i = 1; i < 10; i++) {
 			tiempos = new double[5];
 			string = generateFriendships(i, 1);
 			for (int j = 0; j < tiempos.length; j++) {
@@ -83,7 +84,7 @@ public class TestEj3 {
 			System.out.print(obtenerPromedio(tiempos) + ";");
 			
 		}
-	}*/
+	}
 	
 	@Test
 	public void generateAllworstCase() {
@@ -91,7 +92,7 @@ public class TestEj3 {
 		String string;
 		double tiempo ;
 		double[] tiempos;
-		for (int i = 14; i < 15; i++) {
+		for (int i = 1; i < 10; i++) {
 			tiempos = new double[5];
 			string = generateFriendships(i, i);
 			for (int j = 0; j < tiempos.length; j++) {
@@ -108,7 +109,7 @@ public class TestEj3 {
 
 	public String generateFriendships(int elements, int friendships) {
 		String result = "";
-		
+
 		for (int i = 0; i < elements; i++) {
 			//Para que empiecen de la "a" sumo 97
 			result = result + (char)(97 + i) + " ";
@@ -132,6 +133,6 @@ public double obtenerPromedio(double[] tiempos){
 	for (int i = 2; i < tiempos.length -1; i++) {
 		promedio += tiempos[i];
 	}
-	return promedio/3;
+	return (promedio/3)/1000;
 }
 }

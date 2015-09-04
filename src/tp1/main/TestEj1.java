@@ -66,7 +66,7 @@ public class TestEj1 {
 		String string;
 		double tiempo ;
 		double[] tiempos;
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1000; i++) {
 			tiempos = new double[5];
 			string = "1";
 			for (int j = 0; j < i ; j++) {
@@ -79,7 +79,7 @@ public class TestEj1 {
 				tiempos[j] = tiempo;
 			}
 			
-			System.out.print(obtenerPromedio(tiempos) + ";");
+			System.out.print(obtenerPromedio(tiempos));
 			
 		}
 		System.out.println("----------------");
@@ -93,7 +93,7 @@ public class TestEj1 {
 		String string;
 		double tiempo ;
 		double[] tiempos;
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1000; i++) {
 			tiempos = new double[5];
 			string = "1";
 			for (int j = 0; j < i-1 ; j++) {
@@ -107,7 +107,7 @@ public class TestEj1 {
 				tiempos[j] = tiempo;
 			}
 			
-			System.out.print(obtenerPromedio(tiempos) + ";");
+			System.out.println(obtenerPromedio(tiempos));
 			
 		}
 	}
@@ -120,6 +120,6 @@ public double obtenerPromedio(double[] tiempos){
 	for (int i = 2; i < tiempos.length -1; i++) {
 		promedio += tiempos[i];
 	}
-	return promedio/3;
+	return (promedio/3)/1000;
 }
 }

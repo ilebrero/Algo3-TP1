@@ -101,7 +101,7 @@ public class Main {
         for(String input : inputs) {
         	double tiempo = System.nanoTime();
         	ronda = TesterEj3.procesar(input);
-            resultados.add(ronda.amigaMasLejana+" "+ronda.ronda.toString());
+            resultados.add(ronda.toString());
         	tiempo = System.nanoTime() - tiempo;
         	System.out.println("tiempo: " + tiempo);
         }

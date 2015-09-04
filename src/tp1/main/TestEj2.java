@@ -86,7 +86,7 @@ public class TestEj2 {
 
 		double tiempo ;
 		double[] tiempos = null;
-		
+		System.out.println("WORST CASE -----");
 		String string;
 		for (int i = 0; i < 1000; i += 2) {
 			string = "2";
@@ -104,7 +104,7 @@ public class TestEj2 {
 				tiempo = System.nanoTime() - tiempo;
 				tiempos[j] = tiempo;
 			}
-			System.out.print(obtenerPromedio(tiempos) + ";");
+			System.out.println(obtenerPromedio(tiempos) + ";");
 		}	
 		System.out.println("--------------");
 	}
@@ -117,6 +117,7 @@ public class TestEj2 {
 
 		double tiempo ;
 		double[] tiempos = null;
+		System.out.println("BEST CASE -----");
 		
 		String string;
 		for (int i = 0; i < 1000; i += 2) {
@@ -140,11 +141,12 @@ public class TestEj2 {
 
 	public double obtenerPromedio(double[] tiempos){
 		Arrays.sort(tiempos);
-		double promedio = 0;
+		double promedio = tiempos[0];
 		for (int i = 2; i < tiempos.length -1; i++) {
 			promedio += tiempos[i];
 		}
-		return promedio/3;
+		
+		return (promedio/3)/1000;
 	}
 
 }
