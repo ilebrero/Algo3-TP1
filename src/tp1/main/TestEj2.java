@@ -2,9 +2,13 @@ package tp1.main;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Test;
+
+import tp1.utils.TesterEj2;
+import tp1.utils.Utils;
 
 public class TestEj2 {
 
@@ -23,6 +27,22 @@ public class TestEj2 {
 		assertNotSame(tp1.main.Main.testCatedraEj2Params("4 4"),"1 1");
 		assertNotSame(tp1.main.Main.testCatedraEj2Params("1 3"),"3 4");
 	}
+	
+	@Test
+    public void testCatedraEj2(){
+        ArrayList<Integer[]> inputs;
+        ArrayList<String> resultados;
+        
+        inputs     = Utils.leerInputs("Tp1Ej2.in", 2);
+        resultados = new ArrayList<String>();
+
+        for(Integer[] input : inputs) {
+            resultados.add(TesterEj2.procesar(input));
+        }
+
+        Utils.guardarResultados("Tp1Ej2.out", resultados, 2);
+    }
+	
 	@Test
 	public void stress() {
 		for (int i = 0; i < 1000000; i++) {

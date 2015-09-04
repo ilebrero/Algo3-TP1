@@ -87,4 +87,14 @@ public class Ronda{
             ronda.add(persona);
         }
     }
+    
+    public String toString() {
+		String string = "";
+		string += amigaMasLejana + " ";
+    	
+		for (int i = 0; i < ronda.size(); i++) {
+			string += ronda.get(i);
+		}
+		return string;
+    }
 }

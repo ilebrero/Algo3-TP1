@@ -2,12 +2,14 @@ package tp1.main;
 
 import static org.junit.Assert.*;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
+import tp1.utils.TesterEj3;
+import tp1.utils.Utils;
 
 
 public class TestEj3 {
@@ -33,6 +35,21 @@ public class TestEj3 {
 		assertEquals (tp1.main.Main.testCatedraEj3Params("a b;b a"), "1 ab");
 		assertEquals (tp1.main.Main.testCatedraEj3Params("a b"), "1 ab");
 	}
+	
+    @Test
+    public void testCatedraEj3(){
+        ArrayList<String> inputs;
+        ArrayList<String> resultados;
+
+        inputs     = Utils.leerInputs("Tp1Ej3.in", 3);
+        resultados = new ArrayList<String>();
+
+        for(String input : inputs) {
+            resultados.add(TesterEj3.procesar(input).toString());
+        }
+
+        Utils.guardarResultados("Tp1Ej3.out", resultados, 3);
+    }
 
 	@Test
 	public void worstCase() {
