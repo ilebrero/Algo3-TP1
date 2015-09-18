@@ -22,12 +22,12 @@ public class Exercise3 {
                     test.swap(permutacion, i);
                     Ronda mejorRondaPermutada = mejorPermutacion(test, permutacion + 1);
                     test.swap(permutacion, i);
-                    if (mejorRondaPermutada.sumaDistancias < mejorRondaActual.sumaDistancias && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana ) {
+                    if (mejorRondaPermutada.sumaDistancias < mejorRondaActual.sumaDistancias) {
                     	mejorRondaActual = mejorRondaPermutada;
-                    } else if (mejorRondaPermutada.sumaDistancias ==  mejorRondaActual.sumaDistancias  && mejorRondaPermutada.amigaMasLejana <= mejorRondaActual.amigaMasLejana )
-                        if (compareString(mejorRondaPermutada.ronda.toString(),mejorRondaActual.ronda.toString())){
-                        	mejorRondaActual = mejorRondaPermutada;    
-                        }
+                    } else if ((mejorRondaPermutada.sumaDistancias == mejorRondaActual.sumaDistancias) 
+                        && (compareString(mejorRondaPermutada.ronda.toString(),mejorRondaActual.ronda.toString()))) {
+                       	mejorRondaActual = mejorRondaPermutada;    
+                    }
                 }
 
             return mejorRondaActual;

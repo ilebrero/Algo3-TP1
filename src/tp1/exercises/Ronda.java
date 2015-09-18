@@ -16,8 +16,7 @@ public class Ronda{
 
     public Ronda(ArrayList<Character> ronda){
             this.ronda = ronda;
-            calcularMaximaDistancia();
-            sumaDistancias();
+            calcularDistancias();
     }
 
     public void swap(int i, int j){
@@ -35,21 +34,8 @@ public class Ronda{
         return posicion;
     }
 
-    public void calcularMaximaDistancia(){
+    public void calcularDistancias(){
         amigaMasLejana = 0;
-        for (String mejoresAmiga : mejoresAmigas) {
-            int posNina = obtenerPos(mejoresAmiga.charAt(0));
-            for (int j = 2; j < mejoresAmiga.length(); j++) {
-                //Calcula la menor distancia entre amigas
-                int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
-                int distancia       = Math.abs(posNina - posicionAmiga);
-                int distanciaMinima = Math.min(distancia, ronda.size() - distancia);
-                if(distanciaMinima > amigaMasLejana) amigaMasLejana = distanciaMinima;
-            }
-        }
-    }
-
-    public void sumaDistancias(){
         sumaDistancias = 0;
         for (String mejoresAmiga : mejoresAmigas) {
             int posNina = obtenerPos(mejoresAmiga.charAt(0));
@@ -57,8 +43,10 @@ public class Ronda{
                 //Calcula la menor distancia entre amigas
                 int posicionAmiga = obtenerPos(mejoresAmiga.charAt(j));
                 int distancia       = Math.abs(posNina - posicionAmiga);
-                int distanciaMinima = minimoInt(distancia, ronda.size() - distancia);
+                int distanciaMinima = Math.min(distancia, ronda.size() - distancia);
+                //Calcuala las dos distancias
                 sumaDistancias += distanciaMinima;
+                if(distanciaMinima > amigaMasLejana) amigaMasLejana = distanciaMinima;
             }
         }
     }
