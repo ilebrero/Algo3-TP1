@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Exercise1 {
 	private static int[][] matriz;
-	
+	private static int[]  mejores;
 	public static int main(String[] args) {
-		return exercise1(4);
+		return exercise1(6);
 	}
 	
 	public static int exercise1(int pisos) {
 		matriz = new int[pisos][pisos];
+		mejores = new int[pisos];
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz.length; j++) {
 				if (j == i){
@@ -23,9 +24,18 @@ public class Exercise1 {
 		
 		matriz[0][1] = -1;
 		matriz[0][3] = -1;
+		matriz[0][4] = -1;
+		matriz[0][6] = -1;
 		matriz[1][2] = -1;
-		matriz[1][3] = -1;
+		matriz[1][4] = -1;
+		matriz[1][5] = -1;
 		matriz[2][3] = -1;
+		matriz[2][4] = -1;
+		matriz[2][5] = -1;
+		matriz[3][4] = -1;
+		matriz[4][6] = -1;
+		matriz[5][6] = -1;
+
 		
 //		for (Portal portal : portales) {
 //			matriz[portal.getFrom()][portal.getTo()] = -1;
@@ -38,29 +48,20 @@ public class Exercise1 {
 		for (int i = 0; i < matriz.length -1; i++) {
 			if (matriz[i][matriz.length-1] == -1){
 				matriz[i][matriz.length-1] = 1;
+				mejores[i] = 1;
+			} else {
+				mejores[i] = -2;
 			}
 		}
 		
-		int portales;
 		for (int i = matriz.length -2; i >= 0; i--) {
-			portales = 2;
 			for (int j = matriz.length - 2; j > i; j--) {
-				if (matriz[i][j] == -1 && matriz[i+1][j+1] > 0){
-					matriz[i][j] = matriz[i+1][j+1] + 1;
+				if (matriz[i][j] == -1 && mejores[j] > 0 ){
+					matriz[i][j] = mejores[j] + 1;
+					mejores[i] = Math.max(mejores[i], matriz[i][j]);
 				}
-				portales++;
 			}
 		}
-		
-		int max = 0;
-		for (int i = 0; i < matriz.length; i++) {
-			max = Math.max(max, matriz[0][i]);
-		}
-		
-		
-		System.out.println(matriz.toString().toString());
-		return max;
-		
+		return mejores[0];	
 	}
-
 }
