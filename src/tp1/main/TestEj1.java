@@ -79,7 +79,7 @@ public class TestEj1 {
 				tiempos[j] = tiempo;
 			}
 			
-			System.out.print(obtenerPromedio(tiempos));
+			System.out.println(obtenerPromedio(tiempos));
 			
 		}
 		System.out.println("----------------");
@@ -107,7 +107,7 @@ public class TestEj1 {
 				tiempos[j] = tiempo;
 			}
 			
-			System.out.println(obtenerPromedio(tiempos));
+			System.out.print(obtenerPromedio(tiempos));
 			
 		}
 	}

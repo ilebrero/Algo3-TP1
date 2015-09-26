@@ -30,7 +30,7 @@ public class Exercise2 {
                 rigthHeap.add(number);
             }
         }
-
+    
         adjustStruct();
 
         if ((i+1) % 2 == 0){
