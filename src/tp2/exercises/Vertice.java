@@ -1,5 +1,6 @@
 package tp2.exercises;
 
+
 public class Vertice {
 	private int nodo1;
 	private int nodo2;
@@ -30,4 +31,11 @@ public class Vertice {
 		}
 		return 0;
 	}
+	  @Override public String toString() {
+		  String string;
+		  string = "Nodo1:" + this.getNodo1() + ", Nodo2 : " 
+		  + this.getNodo2() + ", Peso : " + this.getPeso();
+		  return string;
+	  }
+
 }

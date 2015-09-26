@@ -17,7 +17,10 @@ public class Exercise3 {
 			grafo.addVertice(n1, n2, peso);
 		}
 		
-		ArrayList<Vertice> vertices = new ArrayList(grafo.getVertices());
+		ArrayList<Vertice> vertices = grafo.getSortedVertices();
+		for (int i = 0; i < vertices.size(); i++) {
+			System.out.println(vertices.get(i));
+		}
 		
 		
 		
