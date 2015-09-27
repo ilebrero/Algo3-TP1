@@ -5,6 +5,7 @@ public class Vertice {
 	private int nodo1;
 	private int nodo2;
 	private int peso;
+	private int id;
 	
 	public Vertice(int nodo1,int nodo2,int peso) {
 		this.nodo1 = nodo1;
@@ -22,6 +23,12 @@ public class Vertice {
 	
 	public int getPeso() {
 		return peso;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getId() {
+		return id;
 	}
 	public int compareTo(Vertice other) {
 		if (other.getPeso() < this.getPeso()) {
