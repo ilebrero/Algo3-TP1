@@ -25,11 +25,9 @@ public class BFS{
 		}
 	}
 
-	private boolean recorridos[];
 	private List< List<VerticeAdyacente> > vertices;
 
 	public BFS(List< List<VerticeAdyacente> > vertices){
-		recorridos    = new boolean[ vertices.size() ];
 		this.vertices = vertices; 
 	}
 
@@ -49,8 +47,9 @@ public class BFS{
 
 				NodoConRecorrido proximo = new NodoConRecorrido(nodoActual, pesoParcial);
 
-				if ( !esUltimo(nodoActual) && !pase(nodoActual)) {
+				if ( !esUltimo(nodoActual) && pesoParcial < l.getPesoYaRecorrido()) {
 					cola.add(proximo);
+					l.setPesoYaRecorrido(pesoParcial);
 				} else if ( esUltimo(nodoActual) ) {
 					if (pesoParcial < caminoMinimo) {
 						caminoMinimo = pesoParcial;
@@ -62,15 +61,7 @@ public class BFS{
 
 		return caminoMinimo;
 	}
-
-	private boolean pase(int nodo){
-		boolean result = recorridos[nodo];
-
-		recorridos[nodo] = true;
-
-		return result;
-	}
-
+	
 	private boolean esUltimo(int nodo){
 		return nodo == vertices.size() - 1;
 	}
