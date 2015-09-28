@@ -5,11 +5,9 @@ import java.util.List;
 public class Exercise1 {
 	private static int[][] matriz;
 	private static int[]  mejores;
-	public static int main(String[] args) {
-		return exercise1(6);
-	}
 	
-	public static int exercise1(int pisos) {
+	public  Exercise1(int pisos,List<Portal> portales) {
+		pisos++;
 		matriz = new int[pisos][pisos];
 		mejores = new int[pisos];
 		for (int i = 0; i < matriz.length; i++) {
@@ -22,29 +20,12 @@ public class Exercise1 {
 			}
 		}
 		
-		matriz[0][1] = -1;
-		matriz[0][3] = -1;
-		matriz[0][4] = -1;
-		matriz[0][6] = -1;
-		matriz[1][2] = -1;
-		matriz[1][4] = -1;
-		matriz[1][5] = -1;
-		matriz[2][3] = -1;
-		matriz[2][4] = -1;
-		matriz[2][5] = -1;
-		matriz[3][4] = -1;
-		matriz[4][6] = -1;
-		matriz[5][6] = -1;
-
-		
-//		for (Portal portal : portales) {
-//			matriz[portal.getFrom()][portal.getTo()] = -1;
-//		}
-		
-		return resolver();
-		
+		for (int i = 0; i < portales.size(); i++) {
+			matriz[(int) portales.get(i).getDesde()][(int) portales.get(i).getHasta()] = -1;
+		}				
 	}
-	private static int resolver() {
+	
+	static int solve() {
 		for (int i = 0; i < matriz.length -1; i++) {
 			if (matriz[i][matriz.length-1] == -1){
 				matriz[i][matriz.length-1] = 1;

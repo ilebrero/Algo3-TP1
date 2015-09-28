@@ -1,18 +1,28 @@
 package tp2.exercises;
 
-public class Portal {
-	private static int from;
-	private static int to;
-	public Portal(int f,int t) {
-		from= f;
-		to = t;
+public class Portal<T extends Comparable> implements Comparable<Portal> {
+
+	private T desde;
+	private T hasta;
+
+	public Portal( T d, T h ) {
+		setDesde( d );
+		setHasta( h );
 	}
-	
-	public int getFrom() {
-		return from;
+
+	public String toString() {
+		return "P: " + getDesde().toString() + " " + getHasta().toString();
 	}
-	
-	public int getTo() {
-		return to;
-	}
+
+   public int compareTo( Portal o ) {
+      return o.getDesde() != getDesde()  ? getDesde().compareTo( o.getDesde() ) : getHasta().compareTo( o.getHasta() );
+   }
+   
+   // Accessors
+   public T getDesde() {               return desde;        }
+   public void setDesde( T d ) {       desde = d;           }
+
+   public T getHasta() {               return hasta;        }
+   public void setHasta( T h ) {       hasta = h;           }
+   
 }

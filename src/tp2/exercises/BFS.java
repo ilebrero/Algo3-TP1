@@ -3,7 +3,7 @@ package tp2.exercises;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
-import tp2.Excercise2.VerticeAdyacente;
+import tp2.Excercises.VerticeAdyacente;
 
 public class BFS{
 

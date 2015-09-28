@@ -7,23 +7,17 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 public class Exercise3 {
 	private Grafo grafo;
 	private UnionFind union;
-	public Exercise3(String nodes) {
+	
+	public Exercise3(java.util.List<Pasillo> pasillos) {
 		grafo = new Grafo();
-		
-		String[] conexiones = nodes.split(";");
-		for (String vertice : conexiones) {
-			String[] vert = vertice.split(" ");
-			int n1 = Integer.parseInt(vert[0]);
-			int n2 = Integer.parseInt(vert[1]);
-			int peso = Integer.parseInt(vert[2]);
-			grafo.addVertice(n1, n2, peso);
+		for (int i = 0; i < pasillos.size(); i++) {
+			Pasillo pasillo = pasillos.get(i);
+			grafo.addVertice(pasillo.getExtremo1(), pasillo.getExtremo2(), pasillo.getLongitud());
 		}
-		union = new UnionFind(grafo.getVertices().size());
-		
+		union = new UnionFind(grafo.getVertices().size() + 1);
+	}
+	public int solve() {
 		ArrayList<Vertice> vertices = grafo.getSortedVertices();
-		for (int i = 0; i < vertices.size(); i++) {
-			System.out.println(vertices.get(i));
-		}
 		int i = 0;
 		int peso = 0;
 		while (i < vertices.size()) {
@@ -33,7 +27,6 @@ public class Exercise3 {
 			}
 			i++;
 		}
-		System.out.println(grafo.getPeso() - peso);
-		
+		return grafo.getPeso() - peso;
 	}
 }
