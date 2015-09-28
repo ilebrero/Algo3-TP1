@@ -32,10 +32,8 @@ public class Grafo {
 	public ArrayList<Vertice> getSortedVertices(){
 		Collections.sort(vertices, new Comparator<Vertice>() {
 	        @Override
-	        public int compare(Vertice  v1, Vertice  v2)
-	        {
-
-	            return  v2.compareTo(v1);
+	        public int compare(Vertice  v1, Vertice  v2){
+	        	return  v2.compareTo(v1);
 	        }
 	    });
 		return vertices;

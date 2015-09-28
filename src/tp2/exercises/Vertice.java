@@ -1,7 +1,7 @@
 package tp2.exercises;
 
 
-public class Vertice {
+public class Vertice implements Comparable<Vertice>{
 	private int nodo1;
 	private int nodo2;
 	private int peso;
@@ -30,6 +30,7 @@ public class Vertice {
 	public int getId() {
 		return id;
 	}
+	@Override
 	public int compareTo(Vertice other) {
 		if (other.getPeso() < this.getPeso()) {
 			return 1;
