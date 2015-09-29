@@ -1,23 +1,23 @@
 package tp2.exercises;
 
 
-public class Vertice implements Comparable<Vertice>{
-	private int nodo1;
-	private int nodo2;
+public class Vertice<T extends Comparable> implements Comparable<Vertice>{
+	private T nodo1;
+	private T nodo2;
 	private int peso;
 	private int id;
 	
-	public Vertice(int nodo1,int nodo2,int peso) {
+	public Vertice(T nodo1,T nodo2, int  peso) {
 		this.nodo1 = nodo1;
 		this.nodo2 = nodo2;
 		this.peso = peso;
 	}
 	
-	public int getNodo1() {
+	public T getNodo1() {
 		return nodo1;
 	}
 	
-	public int getNodo2() {
+	public T getNodo2() {
 		return nodo2;
 	}
 	
@@ -27,7 +27,7 @@ public class Vertice implements Comparable<Vertice>{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId() {
+	public int  getId() {
 		return id;
 	}
 	@Override
@@ -39,7 +39,8 @@ public class Vertice implements Comparable<Vertice>{
 		}
 		return 0;
 	}
-	  @Override public String toString() {
+	
+  @Override public String toString() {
 		  String string;
 		  string = "Nodo1:" + this.getNodo1() + ", Nodo2 : " 
 		  + this.getNodo2() + ", Peso : " + this.getPeso();

@@ -1,38 +1,22 @@
 package tp2.exercises;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Exercise2 {
-	private int pisoFin;
-	private int baldozaFin;
-	private List<List<Portal<Baldoza>>> baldozas;
-	private Portal<Baldoza> inicio;
-	public Exercise2(int pisoFin, int baldozaFin,List<Portal<Baldoza>> portales) {
-		this.pisoFin = pisoFin;
-		this.baldozaFin = baldozaFin;
-		this.inicio = portales.get(0);
+	private Grafo2 grafo;
+	private int piso;
+	public Exercise2(int pisos, int longitud ,List<Portal<Baldoza>> portales) {
+		piso = pisos;
+		Baldoza p = portales.get(0).getDesde();
+		portales.add(0, new Portal<Baldoza>( new Baldoza( 0, 0),  p ));
+		portales.add(new Portal<Baldoza>( portales.get(portales.size()-1).getHasta(), new Baldoza( pisos, pisos) ) );
 		
-		baldozas = new ArrayList<List<Portal<Baldoza>>>();
-		for (int i = 0; i < pisoFin; i++) {
-			List<Portal<Baldoza>> bal = new ArrayList<Portal<Baldoza>>();
-			baldozas.add(bal);
-		}
-		
-		for (int i = 0; i < portales.size(); i++) {
-			Portal<Baldoza> portal = portales.get(i);
-			baldozas.get(portal.getDesde().getPiso()).add(portal);
-		}
+		grafo = new Grafo2(portales);
 		
 	}
 
 	public int solve() {
-		return DFS(this.inicio);
-	}
-
-	private int DFS(Portal<Baldoza> inicio) {
-		
-		return 0;
+		return grafo.solve("0,0",piso +"," + piso, 0);
 	}
 
 }

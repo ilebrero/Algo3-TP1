@@ -21,7 +21,7 @@ public class Exercise1 {
 		}
 		
 		for (int i = 0; i < portales.size(); i++) {
-			matriz[(int) portales.get(i).getDesde()][(int) portales.get(i).getHasta()] = -1;
+			matriz[(Integer) portales.get(i).getDesde()][(Integer) portales.get(i).getHasta()] = -1;
 		}				
 	}
 	

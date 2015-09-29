@@ -1,9 +1,9 @@
-package tp2.Excercise2;
+package tp2.exercises;
 
 public class VerticeAdyacente {
     private int nodo;
     private int peso;
-    private int pesoYaRecorrido
+    private int pesoYaRecorrido;
     
     public VerticeAdyacente(int nodo, int peso) {
         this.nodo = nodo;
@@ -23,7 +23,7 @@ public class VerticeAdyacente {
         return pesoYaRecorrido;
     }
 
-    public void setPesoYaRecorrido(int peso) {
+    public int setPesoYaRecorrido(int peso) {
         return this.pesoYaRecorrido = peso;
     }
 }
