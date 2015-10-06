@@ -1,14 +1,17 @@
 package tp2.exercises;
 
 import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+
 import org.junit.Test;
 
 public class TestEj1 {
@@ -119,4 +122,46 @@ public class TestEj1 {
 
 		assertEquals( 2, new Exercise1( 10, portales ).solve() );
 	}
+	
+	@Test
+	public void generateWorstCase() {
+		ArrayList portales = new ArrayList();
+		portales.add( new Portal( 3, 8 ) );
+		portales.add( new Portal( 6, 10 ) );
+		portales.add( new Portal( 2, 7 ) );
+		portales.add( new Portal( 0, 6 ) );
+		Exercise1 ex =new Exercise1( 1000, portales );
+		for (int i = 0; i < 10; i++) {
+			ex.solve();
+		}
+		String string;
+		double tiempo ;
+		double[] tiempos;
+		
+		
+		
+		for (int i = 0; i < 1000; i++) {
+			tiempos = new double[5];
+			
+			for (int j = 0; j < tiempos.length; j++) {
+				ex = new Exercise1(1000, portales);
+				tiempo = System.nanoTime();
+				ex.solve();
+				tiempo = System.nanoTime() - tiempo;
+				tiempos[j] = tiempo;
+			}
+			
+			System.out.print(obtenerPromedio(tiempos));
+			
+		}
+	}
+
+public double obtenerPromedio(double[] tiempos){
+	Arrays.sort(tiempos);
+	double promedio = 0;
+	for (int i = 2; i < tiempos.length -1; i++) {
+		promedio += tiempos[i];
+	}
+	return (promedio/3)/1000;
+}
 }
