@@ -11,28 +11,22 @@ import java.util.Vector;
 import sun.misc.Queue;
 
 public class Grafo2 {
-	private Vector<List<Baldoza>> baldozasPorPiso;
 	private Map<String, Nodo> nodos;
 	private int idVertices;
-	private int peso;
 	private int nodoFantasma = 0;
-	private int pisos;
 	private int mts;
 	private Boolean[] pisosUsados;
 	public Grafo2(List<Portal<Baldoza>> portales, int pisos, int mts) {
-		this.pisos = pisos;
 		this.mts = mts;
-		baldozasPorPiso = new Vector<List<Baldoza>>(pisos);
 		pisosUsados = new Boolean[pisos + 1];
 		for (int i = 0; i < pisosUsados.length; i++) {
 			pisosUsados[i] = false;
 		}
 		nodos = new HashMap<String,Nodo>();
 		idVertices = 0;
-		peso = 0;
 		
 		for (int i = 0; i < portales.size() ; i++) {
-			Portal portal = portales.get(i);		
+			Portal<Baldoza> portal = portales.get(i);		
 			Baldoza b1 = (Baldoza) portal.getDesde();
 			Baldoza b2 = (Baldoza) portal.getHasta();
 			connect(b1,b2);
@@ -40,7 +34,6 @@ public class Grafo2 {
 	}
 	
 	private void connect(Baldoza b1, Baldoza b2) {
-
 		checkFloor(b1);
 		checkFloor(b2);	
 		if (b1.getPiso() != b2.getPiso()){
@@ -78,8 +71,6 @@ public class Grafo2 {
 		Vertice vertice = new Vertice(b1, b2, peso);
 		vertice.setId(idVertices);
 		idVertices++;
-		
-		this.peso += peso;
 	}
 	
 	public Nodo addNodo(int piso, int mts){
