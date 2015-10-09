@@ -97,18 +97,18 @@ public class Grafo2 {
 		while(! cola.isEmpty()){
 			Nodo actual;
 			actual = cola.pop();
-			System.out.println(actual);
+			//System.out.println(actual);
 			List<Nodo> vecinos = actual.getVecinos();		
 			for (int k = 0; k < vecinos.size() ; k++) {
 				if (!vecinos.get(k).getVisitado()){
 					vecinos.get(k).setVisitado();
 					vecinos.get(k).setLongitud(actual.getLongitud()+1);
-					System.out.println("Agrego :" + vecinos.get(k));
+					//System.out.println("Agrego :" + vecinos.get(k));
 					cola.push(vecinos.get(k));
 				}
 			}	
 		}
-		System.out.println(nodo2.getLongitud());
+		//System.out.println(nodo2.getLongitud());
 		return nodo2.getLongitud();	
 	}
 }

@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import org.junit.Test;
@@ -85,4 +86,41 @@ public class TestEj3 {
 
       assertEquals( 52, new Exercise3( pasillos ).solve() );
    }
+   
+   @Test
+   public void averageCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("AVERAGE CASE -----");
+	   
+	  for (int i = 4; i < 100000; i++) {
+		  
+		tiempos = new double[5];		  
+		for (int l = 0; l < 5; l++){
+			ArrayList<Pasillo> pasillos = new ArrayList<Pasillo>();
+			int portals = (int) ( Math.random() * 100 % i ) + 1;
+			  			  
+			for (int j = 0; j < portals; j++) {
+				int p2 = (int) ( Math.random() * 100 % portals );
+				int largo = (int) ( Math.random() * 100 % portals );
+				 
+				pasillos.add( new Pasillo( i, p2, largo ) );
+			}
+			tiempo = System.nanoTime();
+			new Exercise3( pasillos ).solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   
+	public double obtenerPromedio(double[] tiempos){
+		Arrays.sort(tiempos);
+		double promedio = 0;
+		for (int i = 2; i < tiempos.length -1; i++) {
+			promedio += tiempos[i];
+		}
+		return (promedio/3)/1000;
+	}
 }

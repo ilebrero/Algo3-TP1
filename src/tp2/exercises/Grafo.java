@@ -19,7 +19,7 @@ public class Grafo {
 	}
 	
 	public void addVertice(int nodo1, int nodo2, int peso ) {
-		Vertice vertice = new Vertice(nodo1, nodo2, peso);
+		Vertice vertice = new Vertice(nodo1, nodo2, -peso);
 		vertice.setId(idVertices);
 		idVertices++;
 		vertices.add(vertice);
@@ -33,7 +33,7 @@ public class Grafo {
 		Collections.sort(vertices, new Comparator<Vertice>() {
 	        @Override
 	        public int compare(Vertice  v1, Vertice  v2){
-	        	return  v2.compareTo(v1);
+	        	return  v1.compareTo(v2);
 	        }
 	    });
 		return vertices;

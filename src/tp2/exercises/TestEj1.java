@@ -156,12 +156,53 @@ public class TestEj1 {
 		}
 	}
 
-public double obtenerPromedio(double[] tiempos){
-	Arrays.sort(tiempos);
-	double promedio = 0;
-	for (int i = 2; i < tiempos.length -1; i++) {
-		promedio += tiempos[i];
+	@Test
+	   public void averageCaseTest() {
+		   double tiempo ;
+		   double[] tiempos = null;
+		   System.out.println("AVERAGE CASE EX1-----");
+		   
+		  for (int i = 4; i < 100000; i++) {
+			
+			  
+			tiempos = new double[5];		  
+			for (int l = 0; l < 5; l++){
+				ArrayList portales = new ArrayList();
+				int portals = (int) ( Math.random() * 100 % i ) + 1;
+				  
+				//esto obliga a que se generen portales entre todos los pisos
+				int anterior = 0;
+				while (anterior != i) {
+					int p1  = anterior;
+					int p2  = (int) ( Math.random() * 100 % (i - anterior - 1) ) + anterior + 1;
+					  
+					portales.add( new Portal( anterior, p2 ) );
+					anterior = p2;
+				}
+				  
+				for (int j = 0; j < portals; j++) {
+					int p1  = (int) ( Math.random() * 100 % (i+1) );
+					int p2  = (int) ( Math.random() * 100 % (i+1) );
+					
+					portales.add( new Portal( p1, p2 ) );
+				}
+				
+				Exercise1 ex = new Exercise1( 1000, portales );
+				tiempo = System.nanoTime();
+				ex.solve();
+				tiempo = System.nanoTime() - tiempo;
+				tiempos[l] = tiempo;
+			  }
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+		  }
+	   }
+	
+	public double obtenerPromedio(double[] tiempos){
+		Arrays.sort(tiempos);
+		double promedio = 0;
+		for (int i = 2; i < tiempos.length -1; i++) {
+			promedio += tiempos[i];
+		}
+		return (promedio/3)/1000;
 	}
-	return (promedio/3)/1000;
-}
 }

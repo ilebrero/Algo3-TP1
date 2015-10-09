@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import org.junit.Test;
@@ -19,13 +20,14 @@ public class TestEj2 {
       // Con este test se lee el archivo de entrada proporcioando por la catedra 
       //    y se genera la salida
       BufferedReader is = new BufferedReader( new InputStreamReader( getClass().getResourceAsStream( "Tp2Ej2.in" ) ) );
-      BufferedWriter os = new BufferedWriter( new FileWriter( getClass().getResource( "" ).getPath() + "Tp2Ej2.test.out" ) );
-      
+      //BufferedWriter os = new BufferedWriter( new FileWriter( getClass().getResource( "" ).getPath() + "Tp2Ej2.test.out" ) );
+      BufferedWriter os = new BufferedWriter( new FileWriter( "Tp2Ej2.test.out"  ) );
       String line;
       while ( ( line = is.readLine() ) != null ) {
          os.append( run( line, is.readLine() ) ).append( '\n' );
       }
       os.close();
+      is.close();
       
    }
 
@@ -40,6 +42,10 @@ public class TestEj2 {
       while ( ( line = source.readLine() ) != null ) {
          assertEquals( control.readLine(), run( line, source.readLine() ) );
       }
+      
+      source.close();
+      control.close();
+      
       
    }
 
@@ -108,4 +114,89 @@ public class TestEj2 {
 
       assertEquals( 18, new Exercise2( 4, 4, portales ).solve() );
    }
+   
+   @Test
+   public void averageCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("AVERAGE CASE -----");
+	   
+	  for (int i = 4; i < 100000; i++) {
+		  
+		tiempos = new double[5];		  
+		for (int l = 0; l < 5; l++){
+			ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+			int portals = (int) ( Math.random() * 100 % i ) + 1;
+			  
+			//esto obliga a que se generen portales entre todos los pisos
+			int anterior = 0;
+			while (anterior != i) {
+				int p1  = anterior;
+				int p2  = (int) ( Math.random() * 100 % (i - anterior - 1) ) + anterior + 1;
+				int p1m = (int) ( Math.random() * 100 % (i+1) );
+				int p2m = (int) ( Math.random() * 100 % (i+1) );
+				  
+				portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+				anterior = p2;
+			}
+			  
+			for (int j = 0; j < portals; j++) {
+				int p1  = (int) ( Math.random() * 100 % (i+1) );
+				int p2  = (int) ( Math.random() * 100 % (i+1) );
+				int p1m = (int) ( Math.random() * 100 % (i+1) );
+				int p2m = (int) ( Math.random() * 100 % (i+1) );
+				 
+			    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+			}
+			tiempo = System.nanoTime();
+			new Exercise2( i, i, portales ).solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   
+  /* @Test
+	public void generateAllBestCase() {
+		for (int i = 0; i < 1000000; i++) {
+			tp1.main.Main.testCatedraEj2Params("1 4 8 7 6 8 1 2 4 5 6 8 4 3");
+		}
+
+		double tiempo ;
+		double[] tiempos = null;
+		System.out.println("WORST CASE -----");
+		String string;
+		for (int i = 0; i < 1000; i += 2) {
+			string = "2";
+			for (int j = 0; j < i ; j++) {
+				if (j % 2 == 0){
+					string = string + " 1";
+				} else {
+					string = string + " 3";
+				}
+			}
+			tiempos = new double[5];
+			for (int j = 0; j < tiempos.length; j++) {
+				tiempo = System.nanoTime();
+				tp1.main.Main.testCatedraEj2Params(string);
+				tiempo = System.nanoTime() - tiempo;
+				tiempos[j] = tiempo;
+			}
+			System.out.println(obtenerPromedio(tiempos) + ";");
+		}	
+		System.out.println("--------------");
+	}
+   */
+   public double obtenerPromedio(double[] tiempos){
+		Arrays.sort(tiempos);
+		double promedio = tiempos[0];
+		for (int i = 2; i < tiempos.length -1; i++) {
+			promedio += tiempos[i];
+		}
+		promedio = promedio/3/1000;		
+		
+		return promedio;
+	}
+   
 }

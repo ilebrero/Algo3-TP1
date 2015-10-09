@@ -27,6 +27,6 @@ public class Exercise3 {
 			}
 			i++;
 		}
-		return grafo.getPeso() - peso;
+		return -((grafo.getPeso()*-1) - peso);
 	}
 }
