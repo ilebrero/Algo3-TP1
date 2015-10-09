@@ -94,18 +94,27 @@ public class Grafo2 {
 		LinkedList<Nodo> cola = new LinkedList<Nodo>();
 		cola.addFirst(nodo);
 		nodo.setVisitado();
-		while(! cola.isEmpty()){
+		boolean found = false;;
+int iteracion = 1;
+		while(! cola.isEmpty() && !found){
 			Nodo actual;
 			actual = cola.pop();
 			//System.out.println(actual);
 			List<Nodo> vecinos = actual.getVecinos();		
 			for (int k = 0; k < vecinos.size() ; k++) {
-				if (!vecinos.get(k).getVisitado()){
-					vecinos.get(k).setVisitado();
-					vecinos.get(k).setLongitud(actual.getLongitud()+1);
+				Nodo vecinoActual = vecinos.get(k);
+				
+				if (!vecinoActual.getVisitado()){
+					vecinoActual.setVisitado();
+					vecinoActual.setLongitud(actual.getLongitud()+1);
 					//System.out.println("Agrego :" + vecinos.get(k));
-					cola.push(vecinos.get(k));
+					cola.push(vecinoActual);
+					if (vecinoActual.getId() == nodo2.getId()) {
+						//System.out.println("te encontre en la iteracion: " + iteracion);
+						found = true;
+					}
 				}
+				iteracion++;
 			}	
 		}
 		//System.out.println(nodo2.getLongitud());

@@ -116,12 +116,44 @@ public class TestEj2 {
    }
    
    @Test
+   public void bestCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("AVERAGE CASE -----");
+	   
+	  for (int i = 4; i < 1000; i++) {
+		  
+		tiempos = new double[5];		  
+		for (int l = 0; l < 5; l++){
+			ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+			int portals = (int) ( Math.random() * 100 % i ) + 1;
+			  
+		    portales.add( new Portal<Baldoza>( new Baldoza( 0, 1 ), new Baldoza( i, i ) ) );
+			
+			for (int j = 0; j < portals; j++) {
+				int p1  = (int) ( Math.random() * 100 % (i+1) );
+				int p2  = (int) ( Math.random() * 100 % (i+1) );
+				int p1m = (int) ( Math.random() * 100 % (i+1) );
+				int p2m = (int) ( Math.random() * 100 % (i+1) );
+				 
+			    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+			}
+			tiempo = System.nanoTime();
+			new Exercise2( i, i, portales ).solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   
+   @Test
    public void averageCaseTest() {
 	   double tiempo ;
 	   double[] tiempos = null;
 	   System.out.println("AVERAGE CASE -----");
 	   
-	  for (int i = 4; i < 100000; i++) {
+	  for (int i = 4; i < 1000; i++) {
 		  
 		tiempos = new double[5];		  
 		for (int l = 0; l < 5; l++){
@@ -157,7 +189,7 @@ public class TestEj2 {
 	  }
    }
    
-  /* @Test
+   /*@Test
 	public void generateAllBestCase() {
 		for (int i = 0; i < 1000000; i++) {
 			tp1.main.Main.testCatedraEj2Params("1 4 8 7 6 8 1 2 4 5 6 8 4 3");
