@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Grafo2 {
-	private Map<String, Nodo> nodos;
+//	private Map<String, Nodo> nodos;
+	private Nodo[][] nodos;
+	private List<Nodo> nodosFantasmas;
 	private int idVertices;
 	private int nodoFantasma = 0;
 	private int mts;
@@ -17,7 +19,9 @@ public class Grafo2 {
 		for (int i = 0; i < pisosUsados.length; i++) {
 			pisosUsados[i] = false;
 		}
-		nodos = new HashMap<String,Nodo>();
+		nodos = new Nodo[pisos][pisos];
+		nodosFantasmas = new LinkedList<Nodo>();
+		
 		idVertices = 0;
 		
 		for (int i = 0; i < portales.size() ; i++) {
@@ -31,13 +35,14 @@ public class Grafo2 {
 	private void connect(Baldoza b1, Baldoza b2) {
 		checkFloor(b1);
 		checkFloor(b2);	
-		if (b1.getPiso() != b2.getPiso()){
-			addNodo(100, nodoFantasma);
-			connect(b1.getPiso() + "," + b1.getMetros() , "100,"+ nodoFantasma);
-			connect("100,"+ nodoFantasma , b2.getPiso() + "," + b2.getMetros());
-			nodoFantasma++;
-		}	
+		
+		addNodo("FANTASMA", nodoFantasma);
+		connect(b1.getPiso() + "," + b1.getMetros() , "FANTASMA,"+ nodoFantasma);
+		connect("FANTASMA,"+ nodoFantasma , b2.getPiso() + "," + b2.getMetros());
+		nodoFantasma++;		
 	}
+
+	
 
 	private void checkFloor(Baldoza b2){
 		if (!pisosUsados[b2.getPiso()]){
@@ -67,22 +72,33 @@ public class Grafo2 {
 		vertice.setId(idVertices);
 		idVertices++;
 	}
-	
-	public Nodo addNodo(int piso, int mts){
-		if (nodos.get(piso + "," + mts) == null) {
-		nodos.put(piso+","+mts, new Nodo(idVertices));
+	private Nodo addNodo(String string, int nodoFantasma) {
+		nodosFantasmas.add(nodoFantasma,new Nodo(idVertices));
 		idVertices++;
-		nodos.get(piso+","+mts).setCoordenada(piso+","+mts);
+		nodosFantasmas.get(nodoFantasma).setCoordenada("FANTASMA,"+nodoFantasma);
+		return nodosFantasmas.get(nodoFantasma);
+	}
+	public Nodo addNodo(int piso, int mts){
+		if (nodos[piso][mts] == null) {
+			nodos[piso][mts] = new Nodo(idVertices);
+			idVertices++;
+			nodos[piso][mts].setCoordenada(piso+","+mts);
 		}
-		return nodos.get(piso+","+mts);
+		return nodos[piso][mts];
 	}
 	public Nodo getNodo(String string){
-		return nodos.get(string);
+		String[] dato = string.split(",");
+		if (dato[0] == "FANTASMA"){
+			return nodosFantasmas.get(Integer.getInteger(dato[1]));
+		} else {
+			return nodos[Integer.getInteger(dato[0])][Integer.getInteger(dato[1])];
+		}
+		
 	}
 
 	public int solve(String n1, String n2, int i) {	
-		solve(nodos.get(n1),nodos.get(n2),0);
-		return nodos.get(n2).getLongitud();
+		solve(getNodo(n1),getNodo(n2),0);
+		return getNodo(n2).getLongitud();
 	}
 
 	private int solve(Nodo nodo, Nodo nodo2, int i) {
