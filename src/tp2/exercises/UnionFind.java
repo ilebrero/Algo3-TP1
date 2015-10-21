@@ -15,12 +15,21 @@ public class UnionFind {
  }
  
   public int find(int i) {
-
-    int p = _parent[i];
-    if (i == p) {
-      return i;
-    }
-    return _parent[i] = find(p);
+	int father = i;
+        while (father != _parent[father]){
+            father = _parent[father];
+        }
+        while (i != father) {
+            int newi = _parent[i];
+            id[i] = father;
+            i = newi;
+        }
+        return father;
+ //   int p = _parent[i];
+  //  if (i == p) {
+   //   return i;
+   // }
+   // return _parent[i] = find(p);
 
   }
 
