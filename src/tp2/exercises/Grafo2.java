@@ -1,14 +1,9 @@
 package tp2.exercises;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
-
-import sun.misc.Queue;
 
 public class Grafo2 {
 	private Map<String, Nodo> nodos;
@@ -68,7 +63,7 @@ public class Grafo2 {
 	}
 
 	public void addVertice(Baldoza b1, Baldoza b2, int peso ) {
-		Vertice vertice = new Vertice(b1, b2, peso);
+		Vertice<Baldoza> vertice = new Vertice<Baldoza>(b1, b2, peso);
 		vertice.setId(idVertices);
 		idVertices++;
 	}
@@ -95,11 +90,9 @@ public class Grafo2 {
 		cola.addFirst(nodo);
 		nodo.setVisitado();
 		boolean found = false;;
-int iteracion = 1;
 		while(! cola.isEmpty() && !found){
 			Nodo actual;
 			actual = cola.pop();
-			//System.out.println(actual);
 			List<Nodo> vecinos = actual.getVecinos();		
 			for (int k = 0; k < vecinos.size() ; k++) {
 				Nodo vecinoActual = vecinos.get(k);
@@ -107,17 +100,13 @@ int iteracion = 1;
 				if (!vecinoActual.getVisitado()){
 					vecinoActual.setVisitado();
 					vecinoActual.setLongitud(actual.getLongitud()+1);
-					//System.out.println("Agrego :" + vecinos.get(k));
 					cola.push(vecinoActual);
 					if (vecinoActual.getId() == nodo2.getId()) {
-						//System.out.println("te encontre en la iteracion: " + iteracion);
 						found = true;
 					}
 				}
-				iteracion++;
 			}	
 		}
-		//System.out.println(nodo2.getLongitud());
 		return nodo2.getLongitud();	
 	}
 }

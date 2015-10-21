@@ -1,6 +1,7 @@
 package tp2.exercises;
 
 import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,7 +10,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.StringTokenizer;
+
 import org.junit.Test;
 
 public class TestEj3 {
@@ -93,25 +96,30 @@ public class TestEj3 {
 	   double[] tiempos = null;
 	   System.out.println("AVERAGE CASE -----");
 	   
-	  for (int i = 4; i < 100000; i++) {
-		  
-		tiempos = new double[5];		  
+	  for (int i = 4; i < 1000; i++) {
+		  Random randomGenerator = new Random();
+		tiempos = new double[5];
+		int ultimoConectado = i;
+		int cantidadcone = 0;
 		for (int l = 0; l < 5; l++){
 			ArrayList<Pasillo> pasillos = new ArrayList<Pasillo>();
-			int portals = (int) ( Math.random() * 100 % i ) + 1;
-			  			  
-			for (int j = 0; j < portals; j++) {
-				int p2 = (int) ( Math.random() * 100 % portals );
-				int largo = (int) ( Math.random() * 100 % portals );
+			for (int j = 0; j < i ; j++) {
+				
+				int p2 = randomGenerator.nextInt(i);
+				int largo = (int) ( Math.random() * 100 % i -1 );
 				 
-				pasillos.add( new Pasillo( i, p2, largo ) );
+				pasillos.add( new Pasillo( j, p2, largo ) );
+				pasillos.add( new Pasillo( i, i+1, largo ) );
+				pasillos.add( new Pasillo( p2, ultimoConectado, largo ) );
+				cantidadcone += 3;
+				ultimoConectado = p2;
 			}
 			tiempo = System.nanoTime();
 			new Exercise3( pasillos ).solve();
 			tiempo = System.nanoTime() - tiempo;
 			tiempos[l] = tiempo;
 		  }
-		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+		System.out.println(cantidadcone+";"+Math.round( obtenerPromedio(tiempos) ) + ";");
 	  }
    }
    

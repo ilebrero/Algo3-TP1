@@ -2,8 +2,6 @@ package tp2.exercises;
 
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 public class Exercise3 {
 	private Grafo grafo;
 	private UnionFind union;

@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.junit.Test;
@@ -124,7 +125,7 @@ public class TestEj1 {
 	}
 	
 	@Test
-	public void generateWorstCase() {
+	public void generateBestCase() {
 		ArrayList portales = new ArrayList();
 		portales.add( new Portal( 3, 8 ) );
 		portales.add( new Portal( 6, 10 ) );
@@ -137,21 +138,24 @@ public class TestEj1 {
 		String string;
 		double tiempo ;
 		double[] tiempos;
+		System.out.println("BEST CASE EX1-----");
 		
 		
-		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 4; i < 2000; i++) {
 			tiempos = new double[5];
+			portales = new ArrayList();
+	
+//				portales.add( new Portal(0 , i ) );
 			
 			for (int j = 0; j < tiempos.length; j++) {
-				ex = new Exercise1(1000, portales);
+				ex = new Exercise1(i, portales);
 				tiempo = System.nanoTime();
 				ex.solve();
 				tiempo = System.nanoTime() - tiempo;
 				tiempos[j] = tiempo;
 			}
 			
-			System.out.print(obtenerPromedio(tiempos));
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
 			
 		}
 	}
@@ -160,34 +164,40 @@ public class TestEj1 {
 	   public void averageCaseTest() {
 		   double tiempo ;
 		   double[] tiempos = null;
+		   System.out.println();
 		   System.out.println("AVERAGE CASE EX1-----");
+		   Random randomGenerator = new Random();
+			
 		   
-		  for (int i = 4; i < 100000; i++) {
+		  for (int i = 4; i < 2000; i++) {
 			
 			  
 			tiempos = new double[5];		  
 			for (int l = 0; l < 5; l++){
 				ArrayList portales = new ArrayList();
-				int portals = (int) ( Math.random() * 100 % i ) + 1;
+				int portals = i + 1;
 				  
 				//esto obliga a que se generen portales entre todos los pisos
 				int anterior = 0;
 				while (anterior != i) {
 					int p1  = anterior;
-					int p2  = (int) ( Math.random() * 100 % (i - anterior - 1) ) + anterior + 1;
-					  
-					portales.add( new Portal( anterior, p2 ) );
+					int p2  = randomGenerator.nextInt((i - anterior)) + anterior + 1;
+					
+//					  System.out.println("conecte :" + p1 + "con : " + p2 +"vale" +i);
+					if (p2 < i){
+					  portales.add( new Portal( anterior, p2 ) );
+					}
 					anterior = p2;
 				}
 				  
 				for (int j = 0; j < portals; j++) {
-					int p1  = (int) ( Math.random() * 100 % (i+1) );
-					int p2  = (int) ( Math.random() * 100 % (i+1) );
-					
+					int p1  = (int) randomGenerator.nextInt(portals);
+					int p2  = (int) randomGenerator.nextInt(portals);
+//					System.out.println("conecte :" + p1 + "con : " + p2);
 					portales.add( new Portal( p1, p2 ) );
 				}
 				
-				Exercise1 ex = new Exercise1( 1000, portales );
+				Exercise1 ex = new Exercise1( 2000, portales );
 				tiempo = System.nanoTime();
 				ex.solve();
 				tiempo = System.nanoTime() - tiempo;
