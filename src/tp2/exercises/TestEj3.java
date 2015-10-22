@@ -122,7 +122,18 @@ public class TestEj3 {
 		System.out.println(cantidadcone+";"+Math.round( obtenerPromedio(tiempos) ) + ";");
 	  }
    }
-   
+      public  ArrayList<Pasillo> generarCicloPasillo(int i, int cantidad){
+	   Random randomGenerator = new Random();
+	   ArrayList<Pasillo> ciclo = new  ArrayList<Pasillo>();
+	   int peso;
+	   for (int j = 0; j < cantidad; j++) {
+		   peso = randomGenerator.nextInt(100);
+		   ciclo.add(new Pasillo(i,j,peso));
+	   }
+	   peso = randomGenerator.nextInt(100);
+	   ciclo.add(new Pasillo(cantidad-1,i,peso));
+	   return ciclo;
+   }
 	public double obtenerPromedio(double[] tiempos){
 		Arrays.sort(tiempos);
 		double promedio = 0;
