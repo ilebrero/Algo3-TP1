@@ -12,13 +12,14 @@ public class Exercise3 {
 			Pasillo pasillo = pasillos.get(i);
 			grafo.addVertice(pasillo.getExtremo1(), pasillo.getExtremo2(), pasillo.getLongitud());
 		}
-		union = new UnionFind(grafo.getVertices().size() + 1);
+		union = new UnionFind(grafo.getVertices().size() + 0);
 	}
 	public int solve() {
 		ArrayList<Vertice> vertices = grafo.getSortedVertices();
 		int i = 0;
 		int peso = 0;
 		while (i < vertices.size()) {
+			System.out.println("busco el :" + (Integer)vertices.get(i).getNodo1() + "y "+(Integer)vertices.get(i).getNodo2());
 			if (union.find((Integer)vertices.get(i).getNodo1()) != union.find((Integer)vertices.get(i).getNodo2())){
 				union.union((Integer)vertices.get(i).getNodo1(),(Integer) vertices.get(i).getNodo2());
 				peso += vertices.get(i).getPeso();

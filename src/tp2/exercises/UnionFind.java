@@ -7,6 +7,7 @@ public class UnionFind {
 	  private int[] _rank;
 
  public UnionFind(int max) {
+	 max++;
     _parent = new int[max];
     _rank = new int[max];
     for (int i = 0; i < max; i++) {
