@@ -19,7 +19,7 @@ public class Grafo2 {
 		for (int i = 0; i < pisosUsados.length; i++) {
 			pisosUsados[i] = false;
 		}
-		nodos = new Nodo[pisos][pisos];
+		nodos = new Nodo[pisos+1][mts+1];
 		nodosFantasmas = new LinkedList<Nodo>();
 		
 		idVertices = 0;
@@ -88,10 +88,10 @@ public class Grafo2 {
 	}
 	public Nodo getNodo(String string){
 		String[] dato = string.split(",");
-		if (dato[0] == "FANTASMA"){
-			return nodosFantasmas.get(Integer.getInteger(dato[1]));
+		if (dato[0].equals("FANTASMA")){
+			return nodosFantasmas.get(Integer.parseInt(dato[1]));
 		} else {
-			return nodos[Integer.getInteger(dato[0])][Integer.getInteger(dato[1])];
+			return nodos[Integer.parseInt(dato[0])][Integer.parseInt(dato[1])];
 		}
 		
 	}

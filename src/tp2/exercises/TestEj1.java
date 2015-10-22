@@ -144,9 +144,8 @@ public class TestEj1 {
 		for (int i = 1; i < 2000; i++) {
 			tiempos = new double[5];
 			portales = new ArrayList();
-	
+			ex = new Exercise1(i, portales);
 			for (int j = 0; j < tiempos.length; j++) {
-				ex = new Exercise1(i, portales);
 				tiempo = System.nanoTime();
 				ex.solve();
 				tiempo = System.nanoTime() - tiempo;
@@ -178,13 +177,11 @@ public class TestEj1 {
 		for (int i = 1; i < 2000; i++) {
 			tiempos = new double[5];
 			
-			for (j = 0 ; j < i ; j++){
+			for (int j = 0 ; j < i ; j++){
 				portales.add( new Portal(j , i ) );
 			} 
-//				portales.add( new Portal(0 , i ) );
-			
+			ex = new Exercise1(i, portales);
 			for (int j = 0; j < tiempos.length; j++) {
-				ex = new Exercise1(i, portales);
 				tiempo = System.nanoTime();
 				ex.solve();
 				tiempo = System.nanoTime() - tiempo;
@@ -192,7 +189,6 @@ public class TestEj1 {
 			}
 			
 			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
-			
 		}
 	}
 
