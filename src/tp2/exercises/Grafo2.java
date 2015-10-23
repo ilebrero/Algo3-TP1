@@ -100,6 +100,11 @@ public class Grafo2 {
 		solve(getNodo(n1),getNodo(n2),0);
 		return getNodo(n2).getLongitud();
 	}
+	
+	public int solveNoOptimizado(String n1, String n2, int i) {	
+		solveNoOptimizado(getNodo(n1),getNodo(n2),0);
+		return getNodo(n2).getLongitud();
+	}
 
 	private int solve(Nodo nodo, Nodo nodo2, int i) {
 		LinkedList<Nodo> cola = new LinkedList<Nodo>();
@@ -120,6 +125,27 @@ public class Grafo2 {
 					if (vecinoActual.getId() == nodo2.getId()) {
 						found = true;
 					}
+				}
+			}	
+		}
+		return nodo2.getLongitud();	
+	}
+	
+	private int solveNoOptimizado(Nodo nodo, Nodo nodo2, int i) {
+		LinkedList<Nodo> cola = new LinkedList<Nodo>();
+		cola.addFirst(nodo);
+		nodo.setVisitado();
+		while(! cola.isEmpty()){
+			Nodo actual;
+			actual = cola.pop();
+			List<Nodo> vecinos = actual.getVecinos();		
+			for (int k = 0; k < vecinos.size() ; k++) {
+				Nodo vecinoActual = vecinos.get(k);
+				
+				if (!vecinoActual.getVisitado()){
+					vecinoActual.setVisitado();
+					vecinoActual.setLongitud(actual.getLongitud()+1);
+					cola.push(vecinoActual);
 				}
 			}	
 		}

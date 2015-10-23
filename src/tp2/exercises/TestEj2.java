@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 import org.junit.Test;
 
+import tp2.exercises.Baldoza;
+import tp2.exercises.Exercise2;
+import tp2.exercises.Portal;
+
 public class TestEj2 {
 
 
@@ -116,35 +120,62 @@ public class TestEj2 {
    }
    
    @Test
+   public void test4() { 
+      
+      ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+      portales.add( new Portal<Baldoza>( new Baldoza( 0, 0 ), new Baldoza( 0, 4 ) ) );
+      portales.add( new Portal<Baldoza>( new Baldoza( 0, 4 ), new Baldoza( 4, 0 ) ) );
+      portales.add( new Portal<Baldoza>( new Baldoza( 4, 0 ), new Baldoza( 4, 4 ) ) );
+
+      assertEquals( 6, new Exercise2(4, 4, portales ).solve() );
+   }
+   
+   @Test
    public void bestCaseTest() {
 	   double tiempo ;
 	   double[] tiempos = null;
-	   System.out.println("AVERAGE CASE -----");
+	   System.out.println("BEST CASE -----");
 	   
-	  for (int i = 4; i < 1000; i++) {
-		  
-		tiempos = new double[5];		  
-		for (int l = 0; l < 5; l++){
-			ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
-			int portals = (int) ( Math.random() * 100 % i ) + 1;
-			  
-		    portales.add( new Portal<Baldoza>( new Baldoza( 0, 1 ), new Baldoza( i, i ) ) );
-			
-			for (int j = 0; j < portals; j++) {
-				int p1  = (int) ( Math.random() * 100 % (i+1) );
-				int p2  = (int) ( Math.random() * 100 % (i+1) );
-				int p1m = (int) ( Math.random() * 100 % (i+1) );
-				int p2m = (int) ( Math.random() * 100 % (i+1) );
-				 
-			    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+	   for (int i = 4; i < 1000; i++) {		  
+		   tiempos = new double[5];		
+		
+			for (int l = 0; l < 5; l++){
+				ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+				portales = generateBestCasePortals(i);
+				
+				tiempo = System.nanoTime();
+				new Exercise2( i, i, portales ).solve();
+				tiempo = System.nanoTime() - tiempo;
+	
+				tiempos[l] = tiempo;
+			  }
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	   }
+	   System.out.println();
+   }
+   
+   @Test
+   public void worstCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("WORST CASE -----");
+	   
+	   for (int i = 4; i < 1000; i++) {
+		   tiempos = new double[5];		
+		
+		   for (int l = 0; l < 5; l++){
+			   ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+			   portales = generateWorstCasePortals(i);
+			   
+			   tiempo = System.nanoTime();
+			   new Exercise2( i, i, portales ).solve();
+			   tiempo = System.nanoTime() - tiempo;
+				
+			   tiempos[l] = tiempo;
 			}
-			tiempo = System.nanoTime();
-			new Exercise2( i, i, portales ).solve();
-			tiempo = System.nanoTime() - tiempo;
-			tiempos[l] = tiempo;
-		  }
-		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
 	  }
+	  System.out.println();
    }
    
    @Test
@@ -154,39 +185,93 @@ public class TestEj2 {
 	   System.out.println("AVERAGE CASE -----");
 	   
 	  for (int i = 4; i < 1000; i++) {
-		  
-		tiempos = new double[5];		  
+		tiempos = new double[5];		
+		
 		for (int l = 0; l < 5; l++){
 			ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
-			int portals = (int) ( Math.random() * 100 % i ) + 1;
-			  
-			//esto obliga a que se generen portales entre todos los pisos
-			int anterior = 0;
-			while (anterior != i) {
-				int p1  = anterior;
-				int p2  = (int) ( Math.random() * 100 % (i - anterior - 1) ) + anterior + 1;
-				int p1m = (int) ( Math.random() * 100 % (i+1) );
-				int p2m = (int) ( Math.random() * 100 % (i+1) );
-				  
-				portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
-				anterior = p2;
-			}
-			  
-			for (int j = 0; j < portals; j++) {
-				int p1  = (int) ( Math.random() * 100 % (i+1) );
-				int p2  = (int) ( Math.random() * 100 % (i+1) );
-				int p1m = (int) ( Math.random() * 100 % (i+1) );
-				int p2m = (int) ( Math.random() * 100 % (i+1) );
-				 
-			    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
-			}
+			portales = generateAverageCasePortals(i);
+			
 			tiempo = System.nanoTime();
 			new Exercise2( i, i, portales ).solve();
 			tiempo = System.nanoTime() - tiempo;
+			
 			tiempos[l] = tiempo;
-		  }
+		}
 		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
 	  }
+	  System.out.println();
+   }
+   
+   @Test
+   public void bestCaseTestNoOptimizado() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("BEST CASE NO OPTIMIZADO-----");
+	   
+	   for (int i = 4; i < 1000; i++) {		  
+		   tiempos = new double[5];		
+		
+			for (int l = 0; l < 5; l++){
+				ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+				portales = generateBestCasePortals(i);
+				
+				tiempo = System.nanoTime();
+				new Exercise2( i, i, portales ).solveNoOptimizado();
+				tiempo = System.nanoTime() - tiempo;
+	
+				tiempos[l] = tiempo;
+			  }
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	   }
+	   System.out.println();
+   }
+   
+   @Test
+   public void worstCaseTestNoOptimizado() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("WORST CASE NO OPTIMIZADO-----");
+	   
+	   for (int i = 4; i < 1000; i++) {
+		   tiempos = new double[5];		
+		
+		   for (int l = 0; l < 5; l++){
+			   ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+			   portales = generateWorstCasePortals(i);
+			   
+			   tiempo = System.nanoTime();
+			   new Exercise2( i, i, portales ).solveNoOptimizado();
+			   tiempo = System.nanoTime() - tiempo;
+				
+			   tiempos[l] = tiempo;
+			}
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+	  System.out.println();
+   }
+   
+   @Test
+   public void averageCaseTestNoOptimizado() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("AVERAGE CASE NO OPTIMIZADO-----");
+	   
+	  for (int i = 4; i < 1000; i++) {
+		tiempos = new double[5];		
+		
+		for (int l = 0; l < 5; l++){
+			ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+			portales = generateAverageCasePortals(i);
+			
+			tiempo = System.nanoTime();
+			new Exercise2( i, i, portales ).solveNoOptimizado();
+			tiempo = System.nanoTime() - tiempo;
+			
+			tiempos[l] = tiempo;
+		}
+		System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+	  System.out.println();
    }
    
    /*@Test
@@ -230,5 +315,83 @@ public class TestEj2 {
 		
 		return promedio;
 	}
+   
+
+   /*------------------- Generadores de portales -----------------------*/
+   
+   public ArrayList<Portal<Baldoza>> generateBestCasePortals(int i){
+	   ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+	   int portals = (int) ( Math.random() * 100 % i ) + 1;
+		  
+	    portales.add( new Portal<Baldoza>( new Baldoza( 0, 1 ), new Baldoza( i, i ) ) );
+		
+		for (int j = 0; j < portals; j++) {
+			int p1  = (int) ( Math.random() * 100 % (i+1) );
+			int p2  = (int) ( Math.random() * 100 % (i+1) );
+			int p1m = (int) ( Math.random() * 100 % (i+1) );
+			int p2m = (int) ( Math.random() * 100 % (i+1) );
+			 
+		    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+		}
+		
+		return portales; 
+   }
+   
+   public ArrayList<Portal<Baldoza>> generateWorstCasePortals(int i){
+	    ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>(); 
+	    int portals = (int) ( Math.random() * 100 % i );
+	   
+	    portales.add( new Portal<Baldoza>( new Baldoza( i-1, 0 ), new Baldoza( i, 0 ) ) );
+		//esto obliga a que se generen portales entre todos los pisos
+		int anterior = 0;
+		while (anterior != i-1) {
+			int p1  = anterior;
+			int p2  = (int) ( Math.random() * 100 % (i) );
+			int p1m = (int) ( Math.random() * 100 % (i+1) );
+			int p2m = (int) ( Math.random() * 100 % (i+1) );
+			  
+			portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+			anterior++;
+		}
+		
+		for (int j = 0; j < portals; j++) {
+			int p1  = (int) ( Math.random() * 100 % (i+1) );
+			int p2  = (int) ( Math.random() * 100 % (i+1) );
+			int p1m = (int) ( Math.random() * 100 % (i+1) );
+			int p2m = (int) ( Math.random() * 100 % (i+1) );
+			 
+		    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+		}
+		
+		return portales;
+   }
+   
+   public ArrayList<Portal<Baldoza>> generateAverageCasePortals(int i){
+	   ArrayList<Portal<Baldoza>> portales = new ArrayList<Portal<Baldoza>>();
+	   int portals = (int) ( Math.random() * 100 % i ) + 1;
+		  
+		//esto obliga a que se generen portales entre todos los pisos
+		int anterior = 0;
+		while (anterior != i) {
+			int p1  = anterior;
+			int p2  = (int) ( Math.random() * 100 % (i - anterior - 1) ) + anterior + 1;
+			int p1m = (int) ( Math.random() * 100 % (i+1) );
+			int p2m = (int) ( Math.random() * 100 % (i+1) );
+			  
+			portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+			anterior = p2;
+		}
+		  
+		for (int j = 0; j < portals; j++) {
+			int p1  = (int) ( Math.random() * 100 % (i+1) );
+			int p2  = (int) ( Math.random() * 100 % (i+1) );
+			int p1m = (int) ( Math.random() * 100 % (i+1) );
+			int p2m = (int) ( Math.random() * 100 % (i+1) );
+			 
+		    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
+		}a
+		
+		return portales;
+   }
    
 }
