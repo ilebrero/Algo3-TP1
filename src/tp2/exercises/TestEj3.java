@@ -195,7 +195,7 @@ public class TestEj3 {
     public  ArrayList<Pasillo> generarKn(int i){
  	   ArrayList<Pasillo> ciclo = new  ArrayList<Pasillo>();
  	   for (int j = 0; j < i; j++) {
- 		   ciclo.add(new Pasillo(i,j,1));
+ 		   ciclo.add(new Pasillo(i,j,10));
  	   }
  	   ciclo.add(new Pasillo(i-1,i,1));
  	   for (int j = 0; j < i; j++) {

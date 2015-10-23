@@ -19,7 +19,6 @@ public class Exercise3 {
 		int i = 0;
 		int peso = 0;
 		while (i < vertices.size()) {
-			System.out.println("busco el :" + (Integer)vertices.get(i).getNodo1() + "y "+(Integer)vertices.get(i).getNodo2());
 			if (union.find((Integer)vertices.get(i).getNodo1()) != union.find((Integer)vertices.get(i).getNodo2())){
 				union.union((Integer)vertices.get(i).getNodo1(),(Integer) vertices.get(i).getNodo2());
 				peso += vertices.get(i).getPeso();

@@ -389,7 +389,7 @@ public class TestEj2 {
 			int p2m = (int) ( Math.random() * 100 % (i+1) );
 			 
 		    portales.add( new Portal<Baldoza>( new Baldoza( p1, p1m ), new Baldoza( p2, p2m ) ) );
-		}a
+		}
 		
 		return portales;
    }
