@@ -95,6 +95,18 @@ public class TestEj1 {
    }
 
    @Test
+   public voidtest2c(){
+   	ArrayList portales = new ArrayList();
+   	portales.add (new Portal (0,5));
+   	portales.add (new Portal (1,6));
+   	portales.add (new Portal (2,7));
+   	portales.add (new Portal (5,9));
+
+   	assertEquals (2, new Exercise1 (10, portales).solve());
+   }
+
+
+   @Test
    public void test3() {
       ArrayList portales = new ArrayList();
       portales.add( new Portal( 0, 1 ) );
