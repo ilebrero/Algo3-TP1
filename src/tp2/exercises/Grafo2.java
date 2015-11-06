@@ -19,7 +19,7 @@ public class Grafo2 {
 		for (int i = 0; i < pisosUsados.length; i++) {
 			pisosUsados[i] = false;
 		}
-		nodos = new Nodo[pisos][pisos];
+		nodos = new Nodo[pisos+1][mts+1];
 		nodosFantasmas = new LinkedList<Nodo>();
 		
 		idVertices = 0;
@@ -88,16 +88,21 @@ public class Grafo2 {
 	}
 	public Nodo getNodo(String string){
 		String[] dato = string.split(",");
-		if (dato[0] == "FANTASMA"){
-			return nodosFantasmas.get(Integer.getInteger(dato[1]));
+		if (dato[0].equals("FANTASMA")){
+			return nodosFantasmas.get(Integer.parseInt(dato[1]));
 		} else {
-			return nodos[Integer.getInteger(dato[0])][Integer.getInteger(dato[1])];
+			return nodos[Integer.parseInt(dato[0])][Integer.parseInt(dato[1])];
 		}
 		
 	}
 
 	public int solve(String n1, String n2, int i) {	
 		solve(getNodo(n1),getNodo(n2),0);
+		return getNodo(n2).getLongitud();
+	}
+	
+	public int solveNoOptimizado(String n1, String n2, int i) {	
+		solveNoOptimizado(getNodo(n1),getNodo(n2),0);
 		return getNodo(n2).getLongitud();
 	}
 
@@ -120,6 +125,27 @@ public class Grafo2 {
 					if (vecinoActual.getId() == nodo2.getId()) {
 						found = true;
 					}
+				}
+			}	
+		}
+		return nodo2.getLongitud();	
+	}
+	
+	private int solveNoOptimizado(Nodo nodo, Nodo nodo2, int i) {
+		LinkedList<Nodo> cola = new LinkedList<Nodo>();
+		cola.addFirst(nodo);
+		nodo.setVisitado();
+		while(! cola.isEmpty()){
+			Nodo actual;
+			actual = cola.pop();
+			List<Nodo> vecinos = actual.getVecinos();		
+			for (int k = 0; k < vecinos.size() ; k++) {
+				Nodo vecinoActual = vecinos.get(k);
+				
+				if (!vecinoActual.getVisitado()){
+					vecinoActual.setVisitado();
+					vecinoActual.setLongitud(actual.getLongitud()+1);
+					cola.push(vecinoActual);
 				}
 			}	
 		}

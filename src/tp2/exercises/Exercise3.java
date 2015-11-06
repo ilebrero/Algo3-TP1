@@ -12,7 +12,7 @@ public class Exercise3 {
 			Pasillo pasillo = pasillos.get(i);
 			grafo.addVertice(pasillo.getExtremo1(), pasillo.getExtremo2(), pasillo.getLongitud());
 		}
-		union = new UnionFind(grafo.getVertices().size() + 1);
+		union = new UnionFind(grafo.getVertices().size() + 0);
 	}
 	public int solve() {
 		ArrayList<Vertice> vertices = grafo.getSortedVertices();

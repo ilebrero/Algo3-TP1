@@ -123,6 +123,113 @@ public class TestEj3 {
 	  }
    }
    
+   @Test
+   public void bestCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("BEST CASE -----");
+	   Exercise3 ex ;
+	  for (int i = 4; i < 1000; i++) {
+		tiempos = new double[5];
+		ex = new Exercise3( generarKn(i) );
+		for (int l = 0; l < 5; l++){
+			tiempo = System.nanoTime();
+			ex.solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.println(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   
+   @Test
+   public void averageKnCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("BEST CASE -----");
+	   Exercise3 ex ;
+	  for (int i = 4; i < 1000; i++) {
+		tiempos = new double[5];
+		ex = new Exercise3( generarKnRandom(i) );
+		for (int l = 0; l < 5; l++){
+			tiempo = System.nanoTime();
+			ex.solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.println(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   @Test
+   public void worstCaseTest() {
+	   double tiempo ;
+	   double[] tiempos = null;
+	   System.out.println("WORST CASE -----");
+	   Exercise3 ex ;
+	  for (int i = 4; i < 1000; i++) {
+		tiempos = new double[5];
+		ex = new Exercise3( generarCicloPasillo(0, (i * (i-1))/2) );
+		for (int l = 0; l < 5; l++){
+			tiempo = System.nanoTime();
+			ex.solve();
+			tiempo = System.nanoTime() - tiempo;
+			tiempos[l] = tiempo;
+		  }
+		System.out.println(Math.round( obtenerPromedio(tiempos) ) + ";");
+	  }
+   }
+   
+    public  ArrayList<Pasillo> generarCicloPasillo(int i, int cantidad){
+	   Random randomGenerator = new Random();
+	   ArrayList<Pasillo> ciclo = new  ArrayList<Pasillo>();
+	   int peso;
+	   for (int j = 0; j < cantidad; j++) {
+		   peso = randomGenerator.nextInt(100);
+		   ciclo.add(new Pasillo(j,j+1,peso));
+	   }
+	   peso = randomGenerator.nextInt(100);
+	   ciclo.add(new Pasillo(cantidad-1,i,peso));
+	   return ciclo;
+   }
+    
+    public  ArrayList<Pasillo> generarKn(int i){
+ 	   ArrayList<Pasillo> ciclo = new  ArrayList<Pasillo>();
+ 	   for (int j = 0; j < i; j++) {
+ 		   ciclo.add(new Pasillo(i,j,10));
+ 	   }
+ 	   ciclo.add(new Pasillo(i-1,i,1));
+ 	   for (int j = 0; j < i; j++) {
+ 		   for (int k = 0; k < i; k++) {
+ 			   if (Math.abs(j-k) != 1){
+ 				  ciclo.add(new Pasillo(i,j,1));
+ 			   }
+ 		   }
+ 	   }
+ 	   return ciclo;
+    }
+    
+    public  ArrayList<Pasillo> generarKnRandom(int i){
+  	   Random randomGenerator = new Random();
+  	   ArrayList<Pasillo> ciclo = new  ArrayList<Pasillo>();
+  	   int peso;
+  	   for (int j = 0; j < i; j++) {
+  		   peso = randomGenerator.nextInt(100);
+  		   ciclo.add(new Pasillo(i,j,peso));
+  	   }
+  	   peso = randomGenerator.nextInt(100);
+  	   ciclo.add(new Pasillo(i-1,i,1));
+  	   
+  	   for (int j = 0; j < i; j++) {
+  		   for (int k = 0; k < i; k++) {
+  			   if (Math.abs(j-k) != 1){
+  				  peso = randomGenerator.nextInt(100);
+  				  ciclo.add(new Pasillo(i,j,peso));
+  			   }
+  		   }
+  	   }
+  	   return ciclo;
+    }
+    
 	public double obtenerPromedio(double[] tiempos){
 		Arrays.sort(tiempos);
 		double promedio = 0;

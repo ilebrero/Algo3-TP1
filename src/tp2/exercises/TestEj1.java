@@ -153,14 +153,11 @@ public class TestEj1 {
 		System.out.println("BEST CASE EX1-----");
 		
 		
-		for (int i = 4; i < 2000; i++) {
+		for (int i = 1; i < 2000; i++) {
 			tiempos = new double[5];
 			portales = new ArrayList();
-	
-//				portales.add( new Portal(0 , i ) );
-			
+			ex = new Exercise1(i, portales);
 			for (int j = 0; j < tiempos.length; j++) {
-				ex = new Exercise1(i, portales);
 				tiempo = System.nanoTime();
 				ex.solve();
 				tiempo = System.nanoTime() - tiempo;
@@ -168,7 +165,42 @@ public class TestEj1 {
 			}
 			
 			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
+		}
+	}
+	
+	
+	@Test
+	public void generateWorstCase() {
+		ArrayList portales = new ArrayList();
+		portales.add( new Portal( 3, 8 ) );
+		portales.add( new Portal( 6, 10 ) );
+		portales.add( new Portal( 2, 7 ) );
+		portales.add( new Portal( 0, 6 ) );
+		Exercise1 ex =new Exercise1( 1000, portales );
+		for (int i = 0; i < 10; i++) {
+			ex.solve();
+		}
+		String string;
+		double tiempo ;
+		double[] tiempos;
+		System.out.println("WORST CASE EX1-----");
+		portales = new ArrayList();
+		
+		for (int i = 1; i < 2000; i++) {
+			tiempos = new double[5];
 			
+			for (int j = 0 ; j < i ; j++){
+				portales.add( new Portal(j , i ) );
+			} 
+			ex = new Exercise1(i, portales);
+			for (int j = 0; j < tiempos.length; j++) {
+				tiempo = System.nanoTime();
+				ex.solve();
+				tiempo = System.nanoTime() - tiempo;
+				tiempos[j] = tiempo;
+			}
+			
+			System.out.print(Math.round( obtenerPromedio(tiempos) ) + ";");
 		}
 	}
 

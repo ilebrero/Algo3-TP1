@@ -17,4 +17,8 @@ public class Exercise2 {
 		return grafo.solve("0,0", piso + "," + piso, 0);
 	}
 
+	public int solveNoOptimizado() {
+		return grafo.solveNoOptimizado("0,0", piso + "," + piso, 0);
+	}
+
 }

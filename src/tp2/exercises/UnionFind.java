@@ -7,6 +7,7 @@ public class UnionFind {
 	  private int[] _rank;
 
  public UnionFind(int max) {
+	 max++;
     _parent = new int[max];
     _rank = new int[max];
     for (int i = 0; i < max; i++) {
@@ -15,13 +16,16 @@ public class UnionFind {
  }
  
   public int find(int i) {
-
-    int p = _parent[i];
-    if (i == p) {
-      return i;
-    }
-    return _parent[i] = find(p);
-
+	int father = i;
+        while (father != _parent[father]){
+            father = _parent[father];
+        }
+        while (i != father) {
+            int newi = _parent[i];
+            _parent[i] = father;
+            i = newi;
+        }
+        return father;
   }
 
 
