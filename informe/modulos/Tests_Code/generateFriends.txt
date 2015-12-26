@@ -1,0 +1,12 @@
+public String generateFriendships(int elements, int friendships) {
+		String result = "";
+		for (int i = 0; i < elements; i++) {
+			//Para que empiecen de la "a" sumo 97
+			result = result + (char)(97 + i) + " ";
+			for (int j = 0; j < friendships; j++) {
+				result = result + (char)(97 + j);
+			}
+			result = result + ";";
+		}
+		return result;
+	}
